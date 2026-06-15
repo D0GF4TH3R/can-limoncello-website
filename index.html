@@ -12,6 +12,57 @@
 </head>
 <body>
 
+<!-- ============================================================
+     COMING-SOON GATE (temporär) — am Launch-Tag komplett entfernen
+     (dieser Block + <style>/<script> direkt darunter).
+     Weicher, clientseitiger Passwortschutz für die private Vorschau.
+     Passwort unten in GATE_PASSWORD setzen.
+     ============================================================ -->
+<div id="gate">
+  <div class="gate-inner">
+    <p class="gate-mark">Can Limoncello</p>
+    <p class="gate-tag">Lemons from Ibiza · Love from Switzerland</p>
+    <p class="gate-soon">Opening soon</p>
+    <form id="gateForm" class="gate-form" autocomplete="off">
+      <input id="gatePw" type="password" placeholder="Passwort" aria-label="Passwort">
+      <button type="submit">Eintreten</button>
+    </form>
+    <p id="gateError" class="gate-error" hidden>Falsches Passwort.</p>
+  </div>
+</div>
+<style>
+  #gate{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
+    background:var(--cream);color:var(--ink);text-align:center;padding:1.5rem}
+  .gate-inner{max-width:420px;width:100%;animation:fadeUp 1.2s ease both}
+  .gate-mark{font-family:var(--serif);font-size:clamp(2rem,6vw,3rem);font-weight:300;letter-spacing:.04em}
+  .gate-tag{font-style:italic;color:var(--ink-soft);margin-top:.4rem;font-size:1.05rem}
+  .gate-soon{font-family:var(--sans);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);margin:2.4rem 0 1.4rem}
+  .gate-form{display:flex;max-width:320px;margin:0 auto;border-bottom:1px solid var(--ink)}
+  .gate-form input{flex:1;border:0;background:transparent;font-family:var(--serif);font-size:1.05rem;
+    padding:.8rem .2rem;color:var(--ink);outline:none}
+  .gate-form input::placeholder{color:var(--ink-soft);font-style:italic}
+  .gate-form button{border:0;background:transparent;font-family:var(--sans);font-size:.66rem;
+    letter-spacing:.26em;text-transform:uppercase;cursor:pointer;color:var(--ink);padding:0 .4rem}
+  .gate-error{color:#9a3b2e;font-family:var(--sans);font-size:.72rem;letter-spacing:.04em;margin-top:1rem}
+</style>
+<script>
+  (function(){
+    var GATE_PASSWORD = 'ibiza';          // <— hier euer Vorschau-Passwort setzen
+    var KEY = 'cl_gate_ok';
+    var gate = document.getElementById('gate');
+    function unlock(){ if(gate){ gate.remove(); } document.documentElement.style.overflow=''; }
+    try{ if(localStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
+    document.documentElement.style.overflow='hidden';
+    document.getElementById('gateForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var v = document.getElementById('gatePw').value.trim().toLowerCase();
+      if(v === GATE_PASSWORD){ try{ localStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { document.getElementById('gateError').hidden = false; }
+    });
+  })();
+</script>
+
 <nav id="nav">
   <a class="nav-mark" href="#top">Can Limoncello</a>
   <div class="nav-right">
