@@ -1,0 +1,46 @@
+name: Deploy to Hostpoint (FTP)
+
+# Bei jedem Push auf main wird der Website-Inhalt per FTPS in den Hostpoint-Webroot geladen.
+# Manuell auslösbar über Actions-Tab → "Run workflow".
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          # Zugangsdaten AUSSCHLIESSLICH aus GitHub-Secrets — nie hier hardcoden.
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+
+          # FTP über TLS (Port 21, explizit). Von Hostpoint unterstützt und sicherer als
+          # Klartext-FTP. Falls der Zugang nur reines FTP erlaubt: auf "ftp" ändern (siehe DEPLOY.md).
+          protocol: ftps
+
+          # Quelle = Repo-Wurzel.
+          local-dir: ./
+
+          # Ziel = Hostpoint-Webroot. /www/ ist der Hostpoint-Standard — im Control Panel
+          # verifizieren/anpassen (siehe DEPLOY.md). Muss auf "/" enden.
+          server-dir: /www/
+
+          # Nicht hochladen: Repo-/CI-Verwaltung, Doku und OS-Müll.
+          # (Die ersten Einträge bewahren die Standard-Ausschlüsse der Action.)
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            README.md
+            CLAUDE.md
+            DEPLOY.md
+            **/.DS_Store

@@ -1,0 +1,12 @@
+# macOS / iCloud
+.DS_Store
+**/.DS_Store
+._*
+.AppleDouble
+Icon?
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~

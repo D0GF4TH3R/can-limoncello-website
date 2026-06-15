@@ -1,0 +1,80 @@
+/* ============================================================
+   Can Limoncello — Übersetzungen (DE / EN / ES)
+   Neue Texte hier pflegen. Schlüssel = data-i18n="…" im HTML.
+   Diese Datei wird auf allen Seiten eingebunden.
+   ============================================================ */
+
+const I18N = {
+  de:{
+    nav_world:"Die Welt", nav_product:"Der Limoncello", nav_letter:"Der Brief",
+    hero_sub:"Ein Haus. Eine Bucht. Eine Frucht.", hero_scroll:"Eintreten",
+    m_eyebrow:"01 — Der Ort",
+    m_title:"Zwischen den Hügeln und einer versteckten Bucht im Westen Ibizas.",
+    m_body:"Kein Etikett, das eine Geschichte behauptet — ein Ort, der sie hat. Alte Fincas, Steinmauern, Zitronen im Mittagslicht. Hier wächst, was wir abfüllen. Mit Schweizer Präzision, die niemand sieht.",
+    w_eyebrow:"02 — Die Welt", w_title:"Vier Fenster in das Haus und sein Land.",
+    w1_label:"Ort", w1_title:"Die Finca & ihr Land", w1_body:"Bewohnt, nicht inszeniert. Kalkwände, Olivenbäume, schattige Innenhöfe.",
+    w2_label:"Natur", w2_title:"Buchten & wildes Ibiza", w2_body:"Versteckte Calas, Pinien, das Meer im Spätlicht. Die Insel jenseits der Clubs.",
+    w3_label:"Mythos", w3_title:"Es Vedrà & Tanit", w3_body:"Der Felsen am Horizont, die Göttin als stille Signatur.",
+    w4_label:"Frucht", w4_title:"Die Zitrone als Held", w4_body:"Licht, Schale, Haut, Saft. Ein sinnliches Stillleben.",
+    p_eyebrow:"03 — Der Limoncello", p_title:"Geerntet, wo der Asphalt aufhört.",
+    p_body:"Zitronen von der Insel, von Hand geschält. Abgefüllt in der Schweiz, in kleinen Chargen, ohne Eile. Kein Konzentrat, keine Abkürzung — nur Schale, Zeit und eine Präzision, die man schmeckt, aber nicht sieht.",
+    p_note:"50 cl · Limitierte Charge", p_btn:"Vormerken",
+    r_eyebrow:"04 — Das Ritual", r_title:"Kalt. Still. Nach dem Essen.",
+    r_body1:"Eine kleine Flasche im Gefrierfach, zwei Gläser, kein Anlass. Der Moment, in dem der Tag die Schultern senkt — dafür ist er gemacht.",
+    r_body2:"Der Felsen war zuerst da. Wir kamen wegen des Lichts.",
+    b_eyebrow:"05 — Der Brief", b_title:"Der Sommer-Brief",
+    b_body:"Wenige Nachrichten im Jahr. Ein Erntemoment, eine neue Charge, eine Adresse auf der Insel. Wer ihn liest, gehört dazu.",
+    b_ph:"Ihre E-Mail-Adresse", b_btn:"Eintragen", b_success:"Willkommen im Haus.",
+    f_contact:"Kontakt", f_imprint:"Impressum", f_privacy:"Datenschutz", f_terms:"AGB", f_withdrawal:"Widerruf",
+    f_base:"Can Limoncello · Schweiz", f_age:"Alkohol — Abgabe nur an Personen über 18 Jahren.",
+    back_home:"Zurück zur Startseite"
+  },
+  en:{
+    nav_world:"The World", nav_product:"The Limoncello", nav_letter:"The Letter",
+    hero_sub:"A house. A bay. A fruit.", hero_scroll:"Enter",
+    m_eyebrow:"01 — The Place",
+    m_title:"Between the hills and a hidden bay in the west of Ibiza.",
+    m_body:"Not a label that claims a story — a place that has one. Old fincas, stone walls, lemons in the midday light. Here grows what we bottle. With a Swiss precision no one sees.",
+    w_eyebrow:"02 — The World", w_title:"Four windows into the house and its land.",
+    w1_label:"Place", w1_title:"The Finca & its Land", w1_body:"Lived in, not staged. Lime-washed walls, olive trees, shaded courtyards.",
+    w2_label:"Nature", w2_title:"Bays & wild Ibiza", w2_body:"Hidden calas, pines, the sea in late light. The island beyond the clubs.",
+    w3_label:"Myth", w3_title:"Es Vedrà & Tanit", w3_body:"The rock on the horizon, the goddess as a quiet signature.",
+    w4_label:"Fruit", w4_title:"The Lemon as Hero", w4_body:"Light, peel, skin, juice. A sensual still life.",
+    p_eyebrow:"03 — The Limoncello", p_title:"Harvested where the asphalt ends.",
+    p_body:"Lemons from the island, peeled by hand. Bottled in Switzerland, in small batches, without haste. No concentrate, no shortcut — only peel, time and a precision you taste but never see.",
+    p_note:"50 cl · Limited batch", p_btn:"Reserve",
+    r_eyebrow:"04 — The Ritual", r_title:"Cold. Still. After dinner.",
+    r_body1:"A small bottle in the freezer, two glasses, no occasion. The moment the day lowers its shoulders — that's what it's made for.",
+    r_body2:"The rock was here first. We came for the light.",
+    b_eyebrow:"05 — The Letter", b_title:"The Summer Letter",
+    b_body:"A few notes a year. A harvest moment, a new batch, an address on the island. Those who read it belong.",
+    b_ph:"Your email address", b_btn:"Join", b_success:"Welcome to the house.",
+    f_contact:"Contact", f_imprint:"Imprint", f_privacy:"Privacy", f_terms:"Terms", f_withdrawal:"Withdrawal",
+    f_base:"Can Limoncello · Switzerland", f_age:"Alcohol — sold only to persons over 18.",
+    back_home:"Back to homepage"
+  },
+  es:{
+    nav_world:"El Mundo", nav_product:"El Limoncello", nav_letter:"La Carta",
+    hero_sub:"Una casa. Una cala. Una fruta.", hero_scroll:"Entrar",
+    m_eyebrow:"01 — El Lugar",
+    m_title:"Entre las colinas y una cala escondida en el oeste de Ibiza.",
+    m_body:"No una etiqueta que dice tener una historia — un lugar que la tiene. Fincas antiguas, muros de piedra, limones bajo la luz del mediodía. Aquí crece lo que embotellamos. Con una precisión suiza que nadie ve.",
+    w_eyebrow:"02 — El Mundo", w_title:"Cuatro ventanas a la casa y su tierra.",
+    w1_label:"Lugar", w1_title:"La Finca y su tierra", w1_body:"Habitada, no escenificada. Muros encalados, olivos, patios en sombra.",
+    w2_label:"Naturaleza", w2_title:"Calas e Ibiza salvaje", w2_body:"Calas escondidas, pinos, el mar en la última luz. La isla más allá de los clubes.",
+    w3_label:"Mito", w3_title:"Es Vedrà y Tanit", w3_body:"La roca en el horizonte, la diosa como firma silenciosa.",
+    w4_label:"Fruta", w4_title:"El limón como protagonista", w4_body:"Luz, cáscara, piel, zumo. Un bodegón sensual.",
+    p_eyebrow:"03 — El Limoncello", p_title:"Cosechado donde acaba el asfalto.",
+    p_body:"Limones de la isla, pelados a mano. Embotellado en Suiza, en pequeñas partidas, sin prisa. Sin concentrado, sin atajos — solo cáscara, tiempo y una precisión que se saborea pero no se ve.",
+    p_note:"50 cl · Edición limitada", p_btn:"Reservar",
+    r_eyebrow:"04 — El Ritual", r_title:"Frío. En calma. Después de cenar.",
+    r_body1:"Una botella pequeña en el congelador, dos copas, sin ocasión. El momento en que el día baja los hombros — para eso está hecho.",
+    r_body2:"La roca estaba antes. Nosotros vinimos por la luz.",
+    b_eyebrow:"05 — La Carta", b_title:"La Carta de Verano",
+    b_body:"Pocas noticias al año. Un momento de cosecha, una nueva partida, una dirección en la isla. Quien la lee, pertenece.",
+    b_ph:"Tu correo electrónico", b_btn:"Unirse", b_success:"Bienvenido a la casa.",
+    f_contact:"Contacto", f_imprint:"Aviso legal", f_privacy:"Privacidad", f_terms:"Términos", f_withdrawal:"Desistimiento",
+    f_base:"Can Limoncello · Suiza", f_age:"Alcohol — venta solo a mayores de 18 años.",
+    back_home:"Volver al inicio"
+  }
+};
