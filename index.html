@@ -154,20 +154,12 @@
         <span class="price-note" data-i18n="p_note">50 cl · Limitierte Charge</span>
       </div>
       <!-- ============================================================
-           SHOPIFY BUY BUTTON — Einbaustelle
-           Wenn der echte Snippet von The Cocktail da ist:
-           diesen DEMO-Button (#buyDemo) entfernen und stattdessen den
-           Shopify-Snippet hier einsetzen. Offizielles Gerüst zur Orientierung:
-
-           <div id="product-component-XXXX"></div>
-           <script>
-             // ShopifyBuy.buildClient({ domain:'<shop>.myshopify.com',
-             //   storefrontAccessToken:'<token>' }) ... ui.createComponent('product', {
-             //   id:'<product-id>', node: document.getElementById('product-component-XXXX') })
-           </script>
+           SHOPIFY BUY BUTTON — Mount-Node (Init-Script am Seitenende).
+           Rendert den Kauf-Button hier. TEST-Produkt von The Cocktail
+           (Shopify Collective). Beim finalen Produkt nur die "id" (ggf.
+           domain/storefrontAccessToken) im Init-Script austauschen.
            ============================================================ -->
-      <!-- DEMO-Platzhalter (kein Shopify-Backend) — nur zum Testen von Platzierung/Wirkung -->
-      <a class="btn reveal d3" href="#" id="buyDemo" data-i18n="p_btn">Vormerken</a>
+      <div id="product-component-canlimoncello" class="reveal d3"></div>
     </div>
     <div class="frame reveal d1"><img src="assets/img/bottle.jpg" alt="Die Flasche Can Limoncello, beiläufig im Kontext" loading="lazy"></div>
   </div>
@@ -231,55 +223,99 @@
 </footer>
 
 <!-- ============================================================
-     DEMO-CHECKOUT (Attrappe, kein Shopify) — komplett entfernbar.
-     Simuliert nur, wie sich der spätere Buy Button anfühlt.
+     SHOPIFY BUY BUTTON — Init (The Cocktail · Shopify Collective)
+     Lädt das Buy-Button-SDK und rendert den Kauf-Button in
+     #product-component-canlimoncello. Design an die Marke angepasst
+     (Ink-Button, Gold-Hover). TEST-Produkt (id 15769449070966) —
+     beim finalen Produkt nur id (ggf. domain/storefrontAccessToken)
+     austauschen. Der storefrontAccessToken ist ein öffentlicher
+     Storefront-Token und gehört bewusst in den Client-Code.
      ============================================================ -->
-<div id="demoOverlay" aria-hidden="true">
-  <div class="demo-card" role="dialog" aria-modal="true" aria-label="Demo-Checkout">
-    <button class="demo-close" id="demoClose" aria-label="Schließen">&times;</button>
-    <p class="demo-tag">Demo-Checkout · Platzhalter</p>
-    <div class="demo-line">
-      <span>Can Limoncello <em>· 50 cl</em></span>
-      <strong>CHF 39.—</strong>
-    </div>
-    <button class="demo-pay" disabled>Zur Kasse</button>
-    <p class="demo-note">Hier erscheint später der echte Shopify-Checkout des Vertragspartners
-      (The Cocktail). Diese Ansicht ist nur eine Attrappe zum Testen.</p>
-  </div>
-</div>
-
-<style>
-  #demoOverlay{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
-    background:rgba(20,18,14,.55);backdrop-filter:blur(4px);padding:1.5rem}
-  #demoOverlay.open{display:flex;animation:demoFade .35s ease}
-  @keyframes demoFade{from{opacity:0}to{opacity:1}}
-  .demo-card{background:var(--cream);max-width:380px;width:100%;padding:2.4rem 2rem 2rem;
-    border:1px solid var(--line);position:relative;text-align:left;
-    font-family:var(--serif);box-shadow:0 30px 80px rgba(20,18,14,.35)}
-  .demo-close{position:absolute;top:.8rem;right:1rem;background:none;border:0;font-size:1.6rem;
-    line-height:1;color:var(--ink-soft);cursor:pointer}
-  .demo-tag{font-family:var(--sans);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:1.4rem}
-  .demo-line{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
-    padding-bottom:1.2rem;border-bottom:1px solid var(--line);font-size:1.2rem}
-  .demo-line em{font-style:italic;color:var(--ink-soft);font-size:.95rem}
-  .demo-pay{width:100%;margin:1.4rem 0 1.1rem;font-family:var(--sans);font-size:.7rem;
-    letter-spacing:.28em;text-transform:uppercase;padding:1rem;border:0;background:var(--ink);
-    color:var(--cream);opacity:.45;cursor:not-allowed}
-  .demo-note{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--ink-soft)}
-</style>
-<script>
-  // DEMO-Checkout — entfernen, sobald der echte Buy Button drin ist.
-  (function(){
-    var ov = document.getElementById('demoOverlay');
-    var open = function(e){ if(e) e.preventDefault(); ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); };
-    var close = function(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); };
-    var btn = document.getElementById('buyDemo');
-    if(btn) btn.addEventListener('click', open);
-    document.getElementById('demoClose').addEventListener('click', close);
-    ov.addEventListener('click', function(e){ if(e.target === ov) close(); });
-    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
-  })();
+<script type="text/javascript">
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+  } else { loadScript(); }
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyBuyInit;
+  }
+  function ShopifyBuyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: 'xy311a-ax.myshopify.com',
+      storefrontAccessToken: 'acfef6dc81a838c3c5ceb0c46d0a569f',
+    });
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      ui.createComponent('product', {
+        id: '15769449070966',
+        node: document.getElementById('product-component-canlimoncello'),
+        moneyFormat: 'CHF%20%7B%7Bamount%7D%7D',
+        options: {
+          "product": {
+            "contents": { "img": false, "title": false, "price": false, "description": false, "button": true },
+            "styles": {
+              "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" } },
+              "button": {
+                "font-family": "Inter, sans-serif",
+                "font-size": "12px",
+                "font-weight": "400",
+                "letter-spacing": "0.25em",
+                "text-transform": "uppercase",
+                "padding-top": "16px", "padding-bottom": "16px",
+                "padding-left": "34px", "padding-right": "34px",
+                "color": "#F4EFE3",
+                "background-color": "#2A271F",
+                "border-radius": "0",
+                ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
+                ":focus": { "background-color": "#B08F45" }
+              }
+            },
+            "text": { "button": "In den Warenkorb" }
+          },
+          "cart": {
+            "styles": {
+              "button": {
+                "font-family": "Inter, sans-serif", "font-size": "12px", "letter-spacing": "0.2em", "text-transform": "uppercase",
+                "color": "#F4EFE3", "background-color": "#2A271F", "border-radius": "0",
+                ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
+                ":focus": { "background-color": "#B08F45" }
+              }
+            },
+            "text": { "total": "Zwischensumme", "button": "Zur Kasse" }
+          },
+          "toggle": {
+            "styles": {
+              "toggle": {
+                "font-family": "Inter, sans-serif",
+                "background-color": "#2A271F",
+                ":hover": { "background-color": "#4a4636" },
+                ":focus": { "background-color": "#4a4636" }
+              },
+              "count": { "color": "#F4EFE3", ":hover": { "color": "#F4EFE3" } },
+              "iconPath": { "fill": "#F4EFE3" }
+            }
+          },
+          "modalProduct": {
+            "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+            "styles": {
+              "button": {
+                "font-family": "Inter, sans-serif", "text-transform": "uppercase", "letter-spacing": "0.2em",
+                "color": "#F4EFE3", "background-color": "#2A271F", "border-radius": "0",
+                ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
+                ":focus": { "background-color": "#B08F45" }
+              }
+            },
+            "text": { "button": "In den Warenkorb" }
+          }
+        }
+      });
+    });
+  }
+})();
 </script>
 
 <script src="assets/js/i18n.js"></script>
