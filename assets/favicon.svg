@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <g transform="rotate(-28 32 32)">
+    <!-- Blatt -->
+    <path d="M40 16 C48 8 60 9 60 9 C60 9 58 20 47 21 C42 21.5 39 19 40 16 Z" fill="#6E8B3D"/>
+    <path d="M43 18 C49 14 57 11 57 11" stroke="#52682D" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <!-- Zitronenkörper (spitzes Oval) -->
+    <path d="M4 33 C10 19 24 17 32 17 C40 17 54 19 60 33 C54 47 40 49 32 49 C24 49 10 47 4 33 Z" fill="#F2C014"/>
+    <!-- Schattierung unten -->
+    <path d="M8 36 C16 47 28 49 32 49 C40 49 54 47 60 33 C58 41 48 46 36 47 C24 48 13 44 8 36 Z" fill="#E0A800" opacity="0.55"/>
+    <!-- Glanzlicht -->
+    <ellipse cx="26" cy="27" rx="9" ry="4.5" fill="#FFE066" opacity="0.8" transform="rotate(-18 26 27)"/>
+  </g>
+</svg>
