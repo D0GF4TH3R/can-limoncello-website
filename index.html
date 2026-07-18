@@ -47,6 +47,8 @@
   #intro p.show{opacity:1}
   #intro .intro-logo{position:absolute;width:min(28vw,150px);height:auto;opacity:0;transition:opacity .6s ease}
   #intro .intro-logo.show{opacity:1}
+  .intro-skip{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);background:none;border:0;font-family:var(--sans);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);opacity:.45;cursor:pointer;padding:.5rem .7rem;transition:opacity .3s}
+  .intro-skip:hover{opacity:.9}
 
   /* ---------- CAROUSEL ---------- */
   .carousel{width:100%;height:80vh;overflow:hidden;position:relative;background:var(--ink)}
@@ -89,6 +91,7 @@
   <p id="introText2">To the house of Can Limoncello</p>
   <p id="introText3">Grab a bottle and feel Ibiza.</p>
   <img id="introLogo" class="intro-logo" src="assets/img/es-vedra-mark.svg" alt="Es Vedrà">
+  <button id="introSkip" type="button" class="intro-skip">Skip</button>
 </div>
 
 <!-- TOP BAR -->
@@ -177,6 +180,7 @@
   var t3 = document.getElementById('introText3');
   var logo = document.getElementById('introLogo');
   var intro = document.getElementById('intro');
+  var skip = document.getElementById('introSkip');
 
   var SHOW_TEXT1 = 300;
   var HIDE_TEXT1 = SHOW_TEXT1 + 2000;
@@ -187,19 +191,31 @@
   var SHOW_LOGO = HIDE_TEXT3 + 900;
   var END = SHOW_LOGO + 1800;
 
-  setTimeout(function () { t1.classList.add('show'); }, SHOW_TEXT1);
-  setTimeout(function () { t1.classList.remove('show'); }, HIDE_TEXT1);
-  setTimeout(function () { t2.classList.add('show'); }, SHOW_TEXT2);
-  setTimeout(function () { t2.classList.remove('show'); }, HIDE_TEXT2);
-  setTimeout(function () { t3.classList.add('show'); }, SHOW_TEXT3);
-  setTimeout(function () { t3.classList.remove('show'); }, HIDE_TEXT3);
-  setTimeout(function () { logo.classList.add('show'); }, SHOW_LOGO);
-  setTimeout(function () {
+  function finish() {
+    t1.classList.remove('show');
+    t2.classList.remove('show');
+    t3.classList.remove('show');
     logo.classList.remove('show');
     intro.classList.add('hide');
     document.body.classList.remove('intro-lock');
     document.documentElement.classList.remove('intro-lock');
-  }, END);
+  }
+
+  var timers = [
+    setTimeout(function () { t1.classList.add('show'); }, SHOW_TEXT1),
+    setTimeout(function () { t1.classList.remove('show'); }, HIDE_TEXT1),
+    setTimeout(function () { t2.classList.add('show'); }, SHOW_TEXT2),
+    setTimeout(function () { t2.classList.remove('show'); }, HIDE_TEXT2),
+    setTimeout(function () { t3.classList.add('show'); }, SHOW_TEXT3),
+    setTimeout(function () { t3.classList.remove('show'); }, HIDE_TEXT3),
+    setTimeout(function () { logo.classList.add('show'); }, SHOW_LOGO),
+    setTimeout(finish, END)
+  ];
+
+  skip.addEventListener('click', function () {
+    timers.forEach(clearTimeout);
+    finish();
+  });
 })();
 </script>
 
