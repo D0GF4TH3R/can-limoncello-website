@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Can Limoncello — Lemons from Ibiza · Love from Switzerland</title>
-<meta name="description" content="Ein Haus zwischen den Hügeln und einer versteckten Bucht im Westen Ibizas. Can Limoncello — Lemons from Ibiza, Love from Switzerland.">
+<meta name="description" content="Can Limoncello — Lemons from Ibiza, Love from Switzerland.">
 
-<!-- Favicon (gelbe Zitrone) -->
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -16,206 +15,128 @@
 <meta property="og:site_name" content="Can Limoncello">
 <meta property="og:url" content="https://canlimoncello.com/">
 <meta property="og:title" content="Can Limoncello — Lemons from Ibiza · Love from Switzerland">
-<meta property="og:description" content="Ein Haus zwischen den Hügeln und einer versteckten Bucht im Westen Ibizas.">
+<meta property="og:description" content="A house between the hills and a hidden cove in western Ibiza.">
 <meta property="og:image" content="https://canlimoncello.com/assets/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Die Flasche Can Limoncello vor Es Vedrà bei Sonnenuntergang, mit Zitronen und Olivenzweigen">
-<meta property="og:locale" content="de_CH">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Can Limoncello — Lemons from Ibiza · Love from Switzerland">
-<meta name="twitter:description" content="Ein Haus zwischen den Hügeln und einer versteckten Bucht im Westen Ibizas.">
+<meta name="twitter:description" content="A house between the hills and a hidden cove in western Ibiza.">
 <meta name="twitter:image" content="https://canlimoncello.com/assets/img/og-image.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+  :root{--serif:'Outfit',-apple-system,sans-serif;--sans:'Outfit',-apple-system,sans-serif}
+  html.intro-lock, html.intro-lock body{overflow:hidden;height:100%}
+  body{background:#FFFFFF}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{display:flex;align-items:center;justify-content:center;padding:1.6rem 1.5rem;border-bottom:1px solid var(--line)}
+  .topbar img{width:min(18vw,110px);height:auto;display:block}
+
+  /* ---------- INTRO ---------- */
+  #intro{position:fixed;inset:0;z-index:9999;background:#FFFFFF;display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease}
+  #intro.hide{opacity:0;pointer-events:none}
+  #intro p{position:absolute;left:1.5rem;right:1.5rem;font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--ink);letter-spacing:.02em;opacity:0;transition:opacity .8s ease}
+  #intro p.show{opacity:1}
+
+  /* ---------- CAROUSEL ---------- */
+  .carousel{width:100%;height:80vh;overflow:hidden;position:relative;background:var(--ink)}
+  .carousel-track{display:flex;height:100%;width:max-content;animation:carousel-scroll 46s linear infinite}
+  .carousel-track figure{flex:0 0 auto;height:100%;width:min(70vw,760px)}
+  .carousel-track img{width:100%;height:100%;object-fit:cover;display:block}
+  @keyframes carousel-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- TITLE ---------- */
+  .landing-title{text-align:center;padding:clamp(3.5rem,8vw,6rem) 1.5rem 1rem}
+  .landing-title h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.1rem,5vw,3.4rem);color:var(--ink)}
+
+  /* ---------- BOTTLE ---------- */
+  .landing-bottle{display:flex;justify-content:center;padding:1rem 1.5rem clamp(2.5rem,6vw,4rem)}
+  .landing-bottle img{width:auto;height:clamp(440px,66vh,760px);max-width:100%;object-fit:contain}
+
+  /* ---------- BUY ---------- */
+  .landing-buy{max-width:480px;margin:0 auto;padding:1rem 1.5rem clamp(4rem,8vw,6rem);text-align:center}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#000000}
+
+  @media(prefers-reduced-motion: reduce){
+    .carousel-track{animation:none}
+    #intro p, #intro{transition:none}
+  }
+</style>
 </head>
-<body>
+<body class="intro-lock">
 
 <!-- ============================================================
-     COMING-SOON GATE (temporär) — am Launch-Tag komplett entfernen
-     (dieser Block + <style>/<script> direkt darunter).
-     Weicher, clientseitiger Passwortschutz für die private Vorschau.
-     Passwort unten in GATE_PASSWORD setzen.
+     INTRO — zwei sich ablösende Texte, danach Fade auf die Seite.
      ============================================================ -->
-<div id="gate">
-  <div class="gate-inner">
-    <p class="gate-mark">Can Limoncello</p>
-    <p class="gate-tag">Lemons from Ibiza · Love from Switzerland</p>
-    <p class="gate-soon">Opening soon</p>
-    <form id="gateForm" class="gate-form" autocomplete="off">
-      <input id="gatePw" type="password" placeholder="Passwort" aria-label="Passwort">
-      <button type="submit">Eintreten</button>
-    </form>
-    <p id="gateError" class="gate-error" hidden>Falsches Passwort.</p>
+<div id="intro">
+  <p id="introText1">Welcome dear visitor</p>
+  <p id="introText2">Grab a Limoncello and join the house</p>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <img src="assets/img/es-vedra-mark.svg" alt="Es Vedrà" width="85" height="28">
+</div>
+
+<!-- ============================================================
+     CAROUSEL — automatisch scrollend, Bilderliste doppelt für
+     nahtlose Endlosschleife (CSS-Animation, keine Library).
+     ============================================================ -->
+<div class="carousel">
+  <div class="carousel-track">
+    <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="Poolside chess" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/cove-boat.jpg" alt="Hidden cove with boat" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="Evening gathering" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-street-dusk.jpg" alt="Old town street at dusk" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="Cliffside terrace over the sea" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="Old town street at golden hour" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="Shaded beach lounge" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="Vintage market street" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="Vintage motorbike on a dirt road" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="White house terrace over the sea" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="Hï Ibiza sign" loading="eager"></figure>
+    <!-- Duplikat der Liste für nahtlosen Loop -->
+    <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/cove-boat.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-street-dusk.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="" loading="lazy"></figure>
   </div>
 </div>
-<style>
-  #gate{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
-    background:var(--cream);color:var(--ink);text-align:center;padding:1.5rem}
-  .gate-inner{max-width:420px;width:100%;animation:fadeUp 1.2s ease both}
-  .gate-mark{font-family:var(--serif);font-size:clamp(2rem,6vw,3rem);font-weight:300;letter-spacing:.04em}
-  .gate-tag{font-style:italic;color:var(--ink-soft);margin-top:.4rem;font-size:1.05rem}
-  .gate-soon{font-family:var(--sans);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--gold);margin:2.4rem 0 1.4rem}
-  .gate-form{display:flex;max-width:320px;margin:0 auto;border-bottom:1px solid var(--ink)}
-  .gate-form input{flex:1;border:0;background:transparent;font-family:var(--serif);font-size:1.05rem;
-    padding:.8rem .2rem;color:var(--ink);outline:none}
-  .gate-form input::placeholder{color:var(--ink-soft);font-style:italic}
-  .gate-form button{border:0;background:transparent;font-family:var(--sans);font-size:.66rem;
-    letter-spacing:.26em;text-transform:uppercase;cursor:pointer;color:var(--ink);padding:0 .4rem}
-  .gate-error{color:#9a3b2e;font-family:var(--sans);font-size:.72rem;letter-spacing:.04em;margin-top:1rem}
-</style>
-<script>
-  (function(){
-    var GATE_PASSWORD = 'ibiza';          // <— hier euer Vorschau-Passwort setzen
-    var KEY = 'cl_gate_ok';
-    var gate = document.getElementById('gate');
-    function unlock(){ if(gate){ gate.remove(); } document.documentElement.style.overflow=''; }
-    try{ if(localStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
-    document.documentElement.style.overflow='hidden';
-    document.getElementById('gateForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      var v = document.getElementById('gatePw').value.trim().toLowerCase();
-      if(v === GATE_PASSWORD){ try{ localStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
-      else { document.getElementById('gateError').hidden = false; }
-    });
-  })();
-</script>
 
-<nav id="nav">
-  <a class="nav-mark" href="#top">Can Limoncello</a>
-  <div class="nav-right">
-    <div class="nav-links">
-      <a href="#welt" data-i18n="nav_world">Die Welt</a>
-      <a href="#limoncello" data-i18n="nav_product">Der Limoncello</a>
-      <a href="#brief" data-i18n="nav_letter">Der Brief</a>
-    </div>
-    <div class="lang" id="lang">
-      <button data-lang="de" class="active">DE</button>
-      <button data-lang="en">EN</button>
-      <button data-lang="es">ES</button>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<header class="hero" id="top">
-  <video autoplay muted loop playsinline poster="assets/img/es-vedra.jpg">
-    <!-- Hochformat für schmale Viewports, Querformat sonst. Der Browser nimmt die
-         erste passende Quelle. Poster (es-vedra.jpg) greift, solange das Video lädt. -->
-    <source src="assets/video/hero-portrait.mp4" media="(max-width:640px)" type="video/mp4">
-    <source src="assets/video/hero-desktop.mp4" type="video/mp4">
-  </video>
-  <div class="hero-inner">
-    <p class="label">Lemons from Ibiza &nbsp;·&nbsp; Love from Switzerland</p>
-    <h1 class="hero-title">Can <em>Limoncello</em></h1>
-    <p class="hero-sub" data-i18n="hero_sub">Ein Haus. Eine Bucht. Eine Zitrone.</p>
-  </div>
-  <div class="scroll-hint"><span data-i18n="hero_scroll">Eintreten</span><i></i></div>
-</header>
-
-<!-- MANIFESTO -->
-<section class="manifesto">
-  <div class="wrap">
-    <p class="eyebrow reveal" data-i18n="m_eyebrow">01 — Der Ort</p>
-    <h2 class="reveal d1" data-i18n="m_title">Zwischen den Hügeln und einer versteckten Bucht im Westen Ibizas.</h2>
-    <p class="reveal d2" data-i18n="m_body">Kein Etikett, das eine Geschichte behauptet — ein Ort, der sie hat. Alte Fincas, Steinmauern, Zitronen im Mittagslicht. Hier wächst, was wir abfüllen. Mit Schweizer Präzision, die niemand sieht.</p>
-  </div>
+<!-- TITEL -->
+<section class="landing-title">
+  <h2>Enjoy Ibiza with us</h2>
 </section>
 
-<!-- DIE WELT -->
-<section class="welt" id="welt">
-  <div class="wrap">
-    <div class="welt-head reveal">
-      <div>
-        <p class="eyebrow" data-i18n="w_eyebrow">02 — Die Welt</p>
-        <h2 data-i18n="w_title">Vier Fenster ins Haus und sein Land.</h2>
-      </div>
-    </div>
-    <div class="welt-grid">
-      <figure class="welt-card reveal">
-        <div class="frame"><img src="assets/img/torbogen.jpg" alt="Weiß gekalkter Torbogen einer Finca" loading="lazy"></div>
-        <span class="label" data-i18n="w1_label">Ort</span>
-        <h3 data-i18n="w1_title">Die Finca &amp; ihr Land</h3>
-        <p data-i18n="w1_body">Bewohnt, nicht inszeniert. Kalkwände, Olivenbäume, schattige Innenhöfe.</p>
-      </figure>
-      <figure class="welt-card reveal d1">
-        <div class="frame"><img src="assets/img/wasser.jpg" alt="Klares türkises Wasser an Felsküste" loading="lazy"></div>
-        <span class="label" data-i18n="w2_label">Natur</span>
-        <h3 data-i18n="w2_title">Buchten &amp; wildes Ibiza</h3>
-        <p data-i18n="w2_body">Versteckte Calas, Pinien, das Meer im Spätlicht. Die Insel jenseits der Clubs.</p>
-      </figure>
-      <figure class="welt-card reveal d2">
-        <div class="frame"><img src="assets/img/es-vedra.jpg" alt="Silhouette von Es Vedrà am Horizont" loading="lazy"></div>
-        <span class="label" data-i18n="w3_label">Mythos</span>
-        <h3 data-i18n="w3_title">Es Vedrà &amp; Tanit</h3>
-        <p data-i18n="w3_body">Der Felsen am Horizont, die Göttin als stille Signatur.</p>
-      </figure>
-      <figure class="welt-card reveal d3">
-        <div class="frame"><img src="assets/img/zitrone-terracotta.jpg" alt="Reife Zitrone auf Terracotta" loading="lazy"></div>
-        <span class="label" data-i18n="w4_label">Frucht</span>
-        <h3 data-i18n="w4_title">Nur die Zitrone</h3>
-        <p data-i18n="w4_body">Licht, Schale, Öl, Saft. Ein sinnliches Stillleben.</p>
-      </figure>
-    </div>
-  </div>
+<!-- BOTTLE -->
+<section class="landing-bottle">
+  <img src="assets/img/bottle.jpg" alt="Can Limoncello bottle" loading="lazy">
 </section>
 
-<!-- PRODUKT -->
-<section class="produkt" id="limoncello">
-  <div class="wrap split">
-    <div>
-      <p class="eyebrow reveal" data-i18n="p_eyebrow">03 — Der Limoncello</p>
-      <h2 class="reveal d1" data-i18n="p_title">Geerntet, wo der Asphalt aufhört.</h2>
-      <p class="reveal d2" data-i18n="p_body">Zitronen von der Insel, von Hand geschält. Abgefüllt in der Schweiz, in kleinen Chargen, ohne Eile. Kein Konzentrat, keine Abkürzung — nur Schale, Zeit und eine Präzision, die man schmeckt, aber nicht sieht.</p>
-      <div class="price-row reveal d2">
-        <span class="price">CHF 39.—</span>
-        <span class="price-note" data-i18n="p_note">50 cl · Limitierte Charge</span>
-      </div>
-      <!-- ============================================================
-           SHOPIFY BUY BUTTON — Mount-Node (Init-Script am Seitenende).
-           Rendert den Kauf-Button hier. TEST-Produkt von The Cocktail
-           (Shopify Collective). Beim finalen Produkt nur die "id" (ggf.
-           domain/storefrontAccessToken) im Init-Script austauschen.
-           ============================================================ -->
-      <div id="product-component-canlimoncello" class="reveal d3"></div>
-    </div>
-    <div class="frame reveal d1"><img src="assets/img/bottle.jpg" alt="Die Flasche Can Limoncello, beiläufig im Kontext" loading="lazy"></div>
-  </div>
-</section>
-
-<!-- RITUAL -->
-<section>
-  <div class="wrap split">
-    <div class="frame reveal"><img src="assets/img/glasses.jpg" alt="Zwei eisgekühlte Gläser Limoncello auf einem Tisch" loading="lazy"></div>
-    <div>
-      <p class="eyebrow reveal" data-i18n="r_eyebrow">04 — Das Ritual</p>
-      <h2 class="reveal d1" data-i18n="r_title">Kalt. Still. Nach dem Essen.</h2>
-      <p class="reveal d2" data-i18n="r_body1">Eine kleine Flasche im Gefrierfach, zwei Gläser, kein Anlass. Der Moment, in dem der Tag die Schultern sinken lässt — dafür ist er gemacht.</p>
-      <p class="reveal d3" data-i18n="r_body2">Der Felsen war zuerst da. Wir kamen wegen des Lichts.</p>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="brief" id="brief">
-  <div class="wrap">
-    <p class="eyebrow reveal" data-i18n="b_eyebrow">05 — Der Brief</p>
-    <h2 class="reveal d1" data-i18n="b_title">Der Sommer-Brief</h2>
-    <p class="reveal d2" data-i18n="b_body">Wenige Nachrichten im Jahr. Ein Erntemoment, eine neue Charge, eine Adresse auf der Insel. Wer ihn liest, gehört dazu.</p>
-    <!-- Shopify-Kundenformular (Newsletter). Feldnamen entsprechen Shopifys /contact-Endpoint,
-         damit der spätere Theme-Port 1:1 passt. Shop-Domain in assets/js/main.js (SHOPIFY_DOMAIN). -->
-    <form class="reveal d3" id="briefForm" method="post" action="#" accept-charset="UTF-8">
-      <input type="hidden" name="form_type" value="customer">
-      <input type="hidden" name="utf8" value="✓">
-      <input type="hidden" name="contact[tags]" value="newsletter">
-      <input type="email" name="contact[email]" data-i18n-ph="b_ph" placeholder="Ihre E-Mail-Adresse" required>
-      <button type="submit" data-i18n="b_btn">Eintragen</button>
-    </form>
-  </div>
+<!-- ============================================================
+     SHOPIFY BUY BUTTON — gleiche Produkt-Logik wie im Snippet,
+     Design auf Outfit/Ink/Gold umgestellt, zentriert unter dem
+     Flaschenbild.
+     ============================================================ -->
+<section class="landing-buy">
+  <div id='product-component-1784379987175'></div>
 </section>
 
 <!-- FOOTER -->
@@ -226,39 +147,60 @@
       <p class="foot-tag">Lemons from Ibiza · Love from Switzerland</p>
     </div>
     <div class="foot-links">
-      <!-- TODO Instagram-Handle des Vertragspartners (The Cocktail) eintragen, dann href setzen. -->
       <a href="#">Instagram</a>
-      <a href="mailto:contact@thecocktail.ch" data-i18n="f_contact">Kontakt</a>
-      <a href="impressum.html" data-i18n="f_imprint">Impressum</a>
-      <a href="datenschutz.html" data-i18n="f_privacy">Datenschutz</a>
-      <!-- AGB, Widerruf, Versand, Stornierungen betreffen den Kauf und liegen beim
-           Vertragspartner/Verkäufer (The Cocktail) in dessen Shopify-Checkout.
-           Wir verlinken daher auf die offiziellen Policy-Seiten von The Cocktail. -->
-      <a href="https://www.thecocktail.ch/policies/terms-of-service" target="_blank" rel="noopener" data-i18n="f_terms">AGB</a>
-      <a href="https://www.thecocktail.ch/policies/refund-policy" target="_blank" rel="noopener" data-i18n="f_withdrawal">Widerruf</a>
+      <a href="mailto:contact@thecocktail.ch">Contact</a>
+      <a href="impressum.html">Imprint</a>
+      <a href="datenschutz.html">Privacy</a>
+      <a href="https://www.thecocktail.ch/policies/terms-of-service" target="_blank" rel="noopener">Terms</a>
+      <a href="https://www.thecocktail.ch/policies/refund-policy" target="_blank" rel="noopener">Withdrawal</a>
     </div>
   </div>
   <div class="foot-base">
-    <span><span class="tanit">☽</span> &nbsp;<span data-i18n="f_base">Can Limoncello · Schweiz</span></span>
-    <span data-i18n="f_age">Alkohol — Abgabe nur an Personen über 18 Jahren.</span>
+    <span><span class="tanit">☽</span> &nbsp;Can Limoncello · Switzerland</span>
+    <span>Alcohol — sale only to persons over 18 years of age.</span>
   </div>
 </footer>
 
+<script type="text/javascript">
+(function () {
+  var t1 = document.getElementById('introText1');
+  var t2 = document.getElementById('introText2');
+  var intro = document.getElementById('intro');
+
+  var SHOW_TEXT1 = 200;
+  var HIDE_TEXT1 = SHOW_TEXT1 + 1600;
+  var SHOW_TEXT2 = HIDE_TEXT1 + 800;
+  var END = SHOW_TEXT2 + 3000;
+
+  setTimeout(function () { t1.classList.add('show'); }, SHOW_TEXT1);
+  setTimeout(function () { t1.classList.remove('show'); }, HIDE_TEXT1);
+  setTimeout(function () { t2.classList.add('show'); }, SHOW_TEXT2);
+  setTimeout(function () {
+    t2.classList.remove('show');
+    intro.classList.add('hide');
+    document.body.classList.remove('intro-lock');
+    document.documentElement.classList.remove('intro-lock');
+  }, END);
+})();
+</script>
+
 <!-- ============================================================
-     SHOPIFY BUY BUTTON — Init (The Cocktail · Shopify Collective)
-     Lädt das Buy-Button-SDK und rendert den Kauf-Button in
-     #product-component-canlimoncello. Design an die Marke angepasst
-     (Ink-Button, Gold-Hover). TEST-Produkt (id 15769449070966) —
-     beim finalen Produkt nur id (ggf. domain/storefrontAccessToken)
-     austauschen. Der storefrontAccessToken ist ein öffentlicher
-     Storefront-Token und gehört bewusst in den Client-Code.
+     SHOPIFY BUY BUTTON — Init. Selbe Produkt-ID/Domain/Token wie
+     im Snippet, Design (Outfit/Ink/Gold, zentriert) angepasst.
      ============================================================ -->
 <script type="text/javascript">
+/*<![CDATA[*/
 (function () {
   var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   if (window.ShopifyBuy) {
-    if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
-  } else { loadScript(); }
+    if (window.ShopifyBuy.UI) {
+      ShopifyBuyInit();
+    } else {
+      loadScript();
+    }
+  } else {
+    loadScript();
+  }
   function loadScript() {
     var script = document.createElement('script');
     script.async = true;
@@ -273,74 +215,161 @@
     });
     ShopifyBuy.UI.onReady(client).then(function (ui) {
       ui.createComponent('product', {
-        id: '15769449070966',
-        node: document.getElementById('product-component-canlimoncello'),
+        id: '15809493762422',
+        node: document.getElementById('product-component-1784379987175'),
         moneyFormat: 'CHF%20%7B%7Bamount%7D%7D',
         options: {
-          "product": {
-            "contents": { "img": false, "title": false, "price": false, "description": false, "button": true },
-            "styles": {
-              "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" } },
-              "button": {
-                "font-family": "Inter, sans-serif",
-                "font-size": "12px",
-                "font-weight": "400",
-                "letter-spacing": "0.25em",
-                "text-transform": "uppercase",
-                "padding-top": "16px", "padding-bottom": "16px",
-                "padding-left": "34px", "padding-right": "34px",
-                "color": "#F4EFE3",
-                "background-color": "#2A271F",
-                "border-radius": "0",
-                ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
-                ":focus": { "background-color": "#B08F45" }
-              }
-            },
-            "text": { "button": "In den Warenkorb" }
-          },
-          "cart": {
-            "styles": {
-              "button": {
-                "font-family": "Inter, sans-serif", "font-size": "12px", "letter-spacing": "0.2em", "text-transform": "uppercase",
-                "color": "#F4EFE3", "background-color": "#2A271F", "border-radius": "0",
-                ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
-                ":focus": { "background-color": "#B08F45" }
-              }
-            },
-            "text": { "total": "Zwischensumme", "button": "Zur Kasse" }
-          },
-          "toggle": {
-            "styles": {
-              "toggle": {
-                "font-family": "Inter, sans-serif",
-                "background-color": "#2A271F",
-                ":hover": { "background-color": "#4a4636" },
-                ":focus": { "background-color": "#4a4636" }
-              },
-              "count": { "color": "#F4EFE3", ":hover": { "color": "#F4EFE3" } },
-              "iconPath": { "fill": "#F4EFE3" }
-            }
-          },
-          "modalProduct": {
-            "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
-            "styles": {
-              "button": {
-                "font-family": "Inter, sans-serif", "text-transform": "uppercase", "letter-spacing": "0.2em",
-                "color": "#F4EFE3", "background-color": "#2A271F", "border-radius": "0",
-                ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
-                ":focus": { "background-color": "#B08F45" }
-              }
-            },
-            "text": { "button": "In den Warenkorb" }
-          }
+  "product": {
+    "styles": {
+      "product": {
+        "@media (min-width: 601px)": {
+          "max-width": "100%",
+          "margin-left": "0",
+          "margin-bottom": "0"
+        },
+        "text-align": "center"
+      },
+      "title": {
+        "font-family": "Outfit, sans-serif",
+        "font-weight": "400",
+        "font-size": "1.7rem",
+        "color": "#2A271F"
+      },
+      "price": {
+        "font-family": "Outfit, sans-serif",
+        "font-size": "1.1rem",
+        "color": "#2A271F"
+      },
+      "description": {
+        "font-family": "Outfit, sans-serif",
+        "font-size": ".95rem",
+        "line-height": "1.6",
+        "color": "#55503F"
+      },
+      "compareAt": {
+        "font-family": "Outfit, sans-serif",
+        "font-size": ".85rem",
+        "color": "#55503F"
+      },
+      "unitPrice": {
+        "font-family": "Outfit, sans-serif",
+        "font-size": ".85rem",
+        "color": "#55503F"
+      },
+      "button": {
+        "font-family": "Outfit, sans-serif",
+        "font-size": "12px",
+        "font-weight": "400",
+        "letter-spacing": "0.25em",
+        "text-transform": "uppercase",
+        "padding-top": "16px", "padding-bottom": "16px",
+        "padding-left": "34px", "padding-right": "34px",
+        "color": "#F4EFE3",
+        "background-color": "#2A271F",
+        "border-radius": "0",
+        "margin-top": "1.4rem",
+        ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
+        ":focus": { "background-color": "#B08F45" }
+      }
+    },
+    "contents": {
+      "img": false,
+      "imgWithCarousel": false,
+      "description": true
+    },
+    "width": "100%",
+    "text": {
+      "button": "Add to cart"
+    }
+  },
+  "modalProduct": {
+    "contents": {
+      "img": false,
+      "imgWithCarousel": true,
+      "button": false,
+      "buttonWithQuantity": true
+    },
+    "styles": {
+      "product": {
+        "@media (min-width: 601px)": {
+          "max-width": "100%",
+          "margin-left": "0px",
+          "margin-bottom": "0px"
         }
+      },
+      "button": {
+        "font-family": "Outfit, sans-serif",
+        "text-transform": "uppercase",
+        "letter-spacing": "0.2em",
+        "color": "#F4EFE3",
+        "background-color": "#2A271F",
+        "border-radius": "0",
+        ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
+        ":focus": { "background-color": "#B08F45" }
+      },
+      "title": {
+        "font-family": "Outfit, sans-serif",
+        "font-weight": "500",
+        "font-size": "26px",
+        "color": "#2A271F"
+      },
+      "price": {
+        "font-family": "Outfit, sans-serif",
+        "font-weight": "normal",
+        "font-size": "18px",
+        "color": "#2A271F"
+      },
+      "compareAt": {
+        "font-family": "Outfit, sans-serif",
+        "font-weight": "normal",
+        "font-size": "15.3px",
+        "color": "#55503F"
+      },
+      "unitPrice": {
+        "font-family": "Outfit, sans-serif",
+        "font-weight": "normal",
+        "font-size": "15.3px",
+        "color": "#55503F"
+      }
+    },
+    "text": {
+      "button": "Add to cart"
+    }
+  },
+  "cart": {
+    "styles": {
+      "button": {
+        "font-family": "Outfit, sans-serif",
+        "font-size": "12px",
+        "letter-spacing": "0.2em",
+        "text-transform": "uppercase",
+        "color": "#F4EFE3",
+        "background-color": "#2A271F",
+        "border-radius": "0",
+        ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
+        ":focus": { "background-color": "#B08F45" }
+      }
+    },
+    "text": { "total": "Subtotal", "button": "Checkout" }
+  },
+  "toggle": {
+    "styles": {
+      "toggle": {
+        "font-family": "Outfit, sans-serif",
+        "background-color": "#2A271F",
+        ":hover": { "background-color": "#4a4636" },
+        ":focus": { "background-color": "#4a4636" }
+      },
+      "count": { "color": "#F4EFE3", ":hover": { "color": "#F4EFE3" } },
+      "iconPath": { "fill": "#F4EFE3" }
+    }
+  }
+},
       });
     });
   }
 })();
+/*]]>*/
 </script>
-
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/main.js"></script>
 </body>
 </html>
