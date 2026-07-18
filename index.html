@@ -16,15 +16,15 @@
 <meta property="og:url" content="https://canlimoncello.com/">
 <meta property="og:title" content="Can Limoncello — Lemons from Ibiza · Love from Switzerland">
 <meta property="og:description" content="A house between the hills and a hidden cove in western Ibiza.">
-<meta property="og:image" content="https://canlimoncello.com/assets/img/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Die Flasche Can Limoncello vor Es Vedrà bei Sonnenuntergang, mit Zitronen und Olivenzweigen">
+<meta property="og:image" content="https://canlimoncello.com/assets/img/bottle.jpg">
+<meta property="og:image:width" content="312">
+<meta property="og:image:height" content="922">
+<meta property="og:image:alt" content="Die Flasche Can Limoncello">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Can Limoncello — Lemons from Ibiza · Love from Switzerland">
 <meta name="twitter:description" content="A house between the hills and a hidden cove in western Ibiza.">
-<meta name="twitter:image" content="https://canlimoncello.com/assets/img/og-image.jpg">
+<meta name="twitter:image" content="https://canlimoncello.com/assets/img/bottle.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,8 +43,10 @@
   /* ---------- INTRO ---------- */
   #intro{position:fixed;inset:0;z-index:9999;background:#FFFFFF;display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease}
   #intro.hide{opacity:0;pointer-events:none}
-  #intro p{position:absolute;left:1.5rem;right:1.5rem;font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--ink);letter-spacing:.02em;opacity:0;transition:opacity .8s ease}
+  #intro p{position:absolute;left:1.5rem;right:1.5rem;font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--ink);letter-spacing:.02em;opacity:0;transition:opacity .6s ease}
   #intro p.show{opacity:1}
+  #intro .intro-logo{position:absolute;width:min(28vw,150px);height:auto;opacity:0;transition:opacity .6s ease}
+  #intro .intro-logo.show{opacity:1}
 
   /* ---------- CAROUSEL ---------- */
   .carousel{width:100%;height:80vh;overflow:hidden;position:relative;background:var(--ink)}
@@ -52,6 +54,9 @@
   .carousel-track figure{flex:0 0 auto;height:100%;width:min(70vw,760px)}
   .carousel-track img{width:100%;height:100%;object-fit:cover;display:block}
   @keyframes carousel-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .carousel-arrow{position:absolute;left:50%;bottom:1.2rem;transform:translate(-50%,0);color:#F7F3E8;font-size:1.8rem;line-height:1;animation:arrow-bounce 1.8s ease-in-out infinite;pointer-events:none}
+  @keyframes arrow-bounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+  @media(max-width:480px){.carousel{height:75vh}}
 
   /* ---------- TITLE ---------- */
   .landing-title{text-align:center;padding:clamp(3.5rem,8vw,6rem) 1.5rem 1rem}
@@ -68,19 +73,22 @@
   footer{background:#000000}
 
   @media(prefers-reduced-motion: reduce){
-    .carousel-track{animation:none}
-    #intro p, #intro{transition:none}
+    .carousel-track, .carousel-arrow{animation:none}
+    #intro p, #intro .intro-logo, #intro{transition:none}
   }
 </style>
 </head>
 <body class="intro-lock">
 
 <!-- ============================================================
-     INTRO — zwei sich ablösende Texte, danach Fade auf die Seite.
+     INTRO — drei sich ablösende Texte, dann das Logo, danach
+     Fade auf die Seite.
      ============================================================ -->
 <div id="intro">
   <p id="introText1">Welcome dear visitor</p>
-  <p id="introText2">Grab a Limoncello and join the house</p>
+  <p id="introText2">To the house of Can Limoncello</p>
+  <p id="introText3">Grab a bottle and feel Ibiza.</p>
+  <img id="introLogo" class="intro-logo" src="assets/img/es-vedra-mark.svg" alt="Es Vedrà">
 </div>
 
 <!-- TOP BAR -->
@@ -118,6 +126,7 @@
     <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="" loading="lazy"></figure>
   </div>
+  <div class="carousel-arrow" aria-hidden="true">↓</div>
 </div>
 
 <!-- TITEL -->
@@ -165,18 +174,28 @@
 (function () {
   var t1 = document.getElementById('introText1');
   var t2 = document.getElementById('introText2');
+  var t3 = document.getElementById('introText3');
+  var logo = document.getElementById('introLogo');
   var intro = document.getElementById('intro');
 
-  var SHOW_TEXT1 = 200;
-  var HIDE_TEXT1 = SHOW_TEXT1 + 1600;
-  var SHOW_TEXT2 = HIDE_TEXT1 + 800;
-  var END = SHOW_TEXT2 + 3000;
+  var SHOW_TEXT1 = 300;
+  var HIDE_TEXT1 = SHOW_TEXT1 + 2000;
+  var SHOW_TEXT2 = HIDE_TEXT1 + 900;
+  var HIDE_TEXT2 = SHOW_TEXT2 + 2000;
+  var SHOW_TEXT3 = HIDE_TEXT2 + 900;
+  var HIDE_TEXT3 = SHOW_TEXT3 + 2200;
+  var SHOW_LOGO = HIDE_TEXT3 + 900;
+  var END = SHOW_LOGO + 1800;
 
   setTimeout(function () { t1.classList.add('show'); }, SHOW_TEXT1);
   setTimeout(function () { t1.classList.remove('show'); }, HIDE_TEXT1);
   setTimeout(function () { t2.classList.add('show'); }, SHOW_TEXT2);
+  setTimeout(function () { t2.classList.remove('show'); }, HIDE_TEXT2);
+  setTimeout(function () { t3.classList.add('show'); }, SHOW_TEXT3);
+  setTimeout(function () { t3.classList.remove('show'); }, HIDE_TEXT3);
+  setTimeout(function () { logo.classList.add('show'); }, SHOW_LOGO);
   setTimeout(function () {
-    t2.classList.remove('show');
+    logo.classList.remove('show');
     intro.classList.add('hide');
     document.body.classList.remove('intro-lock');
     document.documentElement.classList.remove('intro-lock');
