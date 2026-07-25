@@ -114,7 +114,7 @@ section{padding:clamp(5rem,11vw,9.5rem) clamp(1.4rem,6vw,4.5rem)}
 .legal ul{padding-left:1.2rem;margin-bottom:.9rem}
 .legal a{color:var(--gold);text-decoration:underline}
 .legal .todo{background:#FBF7EC;border:1px dashed var(--gold);color:var(--ink);padding:1rem 1.2rem;border-radius:4px;font-family:var(--sans);font-size:.85rem;line-height:1.5;margin:1.4rem 0}
-.legal .back{display:inline-block;margin-top:3rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase}
+.legal .back{display:inline-block;margin-top:3rem;padding-bottom:3rem;font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase}
 
 /* Footer */
 footer{background:#2B2820;color:#CFC8B4;padding:4.5rem clamp(1.4rem,6vw,4.5rem) 2.5rem}

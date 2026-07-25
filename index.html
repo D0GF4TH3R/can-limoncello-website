@@ -28,11 +28,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 
 <style>
-  :root{--serif:'Outfit',-apple-system,sans-serif;--sans:'Outfit',-apple-system,sans-serif}
+  :root{--serif:'Poppins',-apple-system,sans-serif;--sans:'Poppins',-apple-system,sans-serif}
   html.intro-lock, html.intro-lock body{overflow:hidden;height:100%}
   body{background:#FFFFFF}
 
@@ -43,10 +43,12 @@
   /* ---------- INTRO ---------- */
   #intro{position:fixed;inset:0;z-index:9999;background:#FFFFFF;display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease}
   #intro.hide{opacity:0;pointer-events:none}
-  #intro p{position:absolute;left:1.5rem;right:1.5rem;font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--ink);letter-spacing:.02em;opacity:0;transition:opacity .6s ease}
-  #intro p.show{opacity:1}
-  #intro .intro-logo{position:absolute;width:min(28vw,150px);height:auto;opacity:0;transition:opacity .6s ease}
-  #intro .intro-logo.show{opacity:1}
+  #intro > p{position:absolute;left:1.5rem;right:1.5rem;font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--ink);letter-spacing:.02em;opacity:0;transition:opacity .6s ease}
+  #intro > p.show{opacity:1}
+  #intro .intro-mark{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:0;transition:opacity .6s ease}
+  #intro .intro-mark.show{opacity:1}
+  .intro-mark-logo{width:min(26vw,130px);height:auto}
+  .intro-mark-name{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,4.6vw,2.6rem);line-height:1.05;letter-spacing:0;text-transform:uppercase;color:var(--ink)}
   .intro-skip{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);background:none;border:0;font-family:var(--sans);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);opacity:.45;cursor:pointer;padding:.5rem .7rem;transition:opacity .3s}
   .intro-skip:hover{opacity:.9}
 
@@ -68,29 +70,38 @@
   .landing-bottle{display:flex;justify-content:center;padding:1rem 1.5rem clamp(2.5rem,6vw,4rem)}
   .landing-bottle img{width:auto;height:clamp(440px,66vh,760px);max-width:100%;object-fit:contain}
 
+  /* ---------- STORY ---------- */
+  .landing-story{max-width:560px;margin:0 auto;padding:0 1.5rem clamp(3rem,6vw,4.5rem);text-align:center}
+  .landing-story p{font-family:var(--serif);font-weight:400;font-size:.85rem;line-height:1.6;color:var(--ink-soft)}
+  .landing-story p + p{margin-top:1rem}
+
   /* ---------- BUY ---------- */
-  .landing-buy{max-width:480px;margin:0 auto;padding:1rem 1.5rem clamp(4rem,8vw,6rem);text-align:center}
+  .landing-buy{max-width:480px;margin:0 auto;padding:1rem 1.5rem 1.5rem;text-align:center}
+
+  /* ---------- TANIT MARK ---------- */
+  .tanit-mark{display:flex;justify-content:center;padding:0 1.5rem clamp(4rem,8vw,6rem)}
+  .tanit-mark img{width:auto;height:34px}
 
   /* ---------- FOOTER ---------- */
   footer{background:#000000}
 
   @media(prefers-reduced-motion: reduce){
     .carousel-track, .carousel-arrow{animation:none}
-    #intro p, #intro .intro-logo, #intro{transition:none}
+    #intro > p, #intro .intro-mark, #intro{transition:none}
   }
 </style>
 </head>
 <body class="intro-lock">
 
 <!-- ============================================================
-     INTRO — drei sich ablösende Texte, dann das Logo, danach
-     Fade auf die Seite.
+     INTRO — Text, dann Logo + Markenname, danach Fade auf die Seite.
      ============================================================ -->
 <div id="intro">
-  <p id="introText1">Welcome dear visitor</p>
-  <p id="introText2">To the house of Can Limoncello</p>
-  <p id="introText3">Grab a bottle and feel Ibiza.</p>
-  <img id="introLogo" class="intro-logo" src="assets/img/es-vedra-mark.svg" alt="Es Vedrà">
+  <p id="introText1">Ready to belong?</p>
+  <div id="introMark" class="intro-mark">
+    <img class="intro-mark-logo" src="assets/img/es-vedra-mark.svg" alt="Es Vedrà">
+    <p class="intro-mark-name">Can<br>Limoncello</p>
+  </div>
   <button id="introSkip" type="button" class="intro-skip">Skip</button>
 </div>
 
@@ -105,29 +116,41 @@
      ============================================================ -->
 <div class="carousel">
   <div class="carousel-track">
-    <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="Poolside chess" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="Old town street at golden hour" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="Cliffside terrace over the sea" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="Shaded beach lounge" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/cove-boat.jpg" alt="Hidden cove with boat" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-plane-tarmac.jpg" alt="Arrival on the Ibiza tarmac" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-plane-cards.jpg" alt="Card game aboard the plane" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="Poolside chess" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="Hï Ibiza sign" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="Cafeteria terrace crowd" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="Woman in traditional dress by the fortress wall" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="Evening gathering" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/old-town-street-dusk.jpg" alt="Old town street at dusk" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="Cliffside terrace over the sea" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="Old town street at golden hour" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="Shaded beach lounge" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="Vintage market street" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="Vintage motorbike on a dirt road" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="White house terrace over the sea" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="Hï Ibiza sign" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="Vintage motorbike on a dirt road" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="Vintage market street" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="Walking the old town street" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="Ice cream in the old town street" loading="eager"></figure>
     <!-- Duplikat der Liste für nahtlosen Loop -->
-    <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/cove-boat.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-plane-tarmac.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-plane-cards.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/old-town-street-dusk.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="" loading="lazy"></figure>
   </div>
   <div class="carousel-arrow" aria-hidden="true">↓</div>
 </div>
@@ -151,6 +174,17 @@
   <div id='product-component-1784379987175'></div>
 </section>
 
+<!-- STORY -->
+<section class="landing-story">
+  <p>It started with two friends bound by love for mystical Eivissa. To share that magic of Es Vedrà with friends, they created Can Limoncello. A Limoncello made with divine lemons from the island of the goddess Tanit. Slowly aged in Switzerland to golden perfection.</p>
+  <p>Take a sip, close your eyes, and let Eivissa find you. Serve well chilled, neat, or over ice.</p>
+</section>
+
+<!-- TANIT -->
+<div class="tanit-mark">
+  <img src="assets/img/tanit-mark.svg" alt="Tanit" loading="lazy">
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="foot-grid">
@@ -159,12 +193,9 @@
       <p class="foot-tag">Lemons from Ibiza · Love from Switzerland</p>
     </div>
     <div class="foot-links">
-      <a href="#">Instagram</a>
-      <a href="mailto:contact@thecocktail.ch">Contact</a>
+      <a href="https://www.instagram.com/canlimoncello" target="_blank" rel="noopener">Instagram</a>
       <a href="impressum.html">Imprint</a>
       <a href="datenschutz.html">Privacy</a>
-      <a href="https://www.thecocktail.ch/policies/terms-of-service" target="_blank" rel="noopener">Terms</a>
-      <a href="https://www.thecocktail.ch/policies/refund-policy" target="_blank" rel="noopener">Withdrawal</a>
     </div>
   </div>
   <div class="foot-base">
@@ -176,26 +207,18 @@
 <script type="text/javascript">
 (function () {
   var t1 = document.getElementById('introText1');
-  var t2 = document.getElementById('introText2');
-  var t3 = document.getElementById('introText3');
-  var logo = document.getElementById('introLogo');
+  var mark = document.getElementById('introMark');
   var intro = document.getElementById('intro');
   var skip = document.getElementById('introSkip');
 
   var SHOW_TEXT1 = 300;
   var HIDE_TEXT1 = SHOW_TEXT1 + 2000;
-  var SHOW_TEXT2 = HIDE_TEXT1 + 900;
-  var HIDE_TEXT2 = SHOW_TEXT2 + 2000;
-  var SHOW_TEXT3 = HIDE_TEXT2 + 900;
-  var HIDE_TEXT3 = SHOW_TEXT3 + 2200;
-  var SHOW_LOGO = HIDE_TEXT3 + 900;
-  var END = SHOW_LOGO + 1800;
+  var SHOW_MARK = HIDE_TEXT1 + 900;
+  var END = SHOW_MARK + 2200;
 
   function finish() {
     t1.classList.remove('show');
-    t2.classList.remove('show');
-    t3.classList.remove('show');
-    logo.classList.remove('show');
+    mark.classList.remove('show');
     intro.classList.add('hide');
     document.body.classList.remove('intro-lock');
     document.documentElement.classList.remove('intro-lock');
@@ -204,11 +227,7 @@
   var timers = [
     setTimeout(function () { t1.classList.add('show'); }, SHOW_TEXT1),
     setTimeout(function () { t1.classList.remove('show'); }, HIDE_TEXT1),
-    setTimeout(function () { t2.classList.add('show'); }, SHOW_TEXT2),
-    setTimeout(function () { t2.classList.remove('show'); }, HIDE_TEXT2),
-    setTimeout(function () { t3.classList.add('show'); }, SHOW_TEXT3),
-    setTimeout(function () { t3.classList.remove('show'); }, HIDE_TEXT3),
-    setTimeout(function () { logo.classList.add('show'); }, SHOW_LOGO),
+    setTimeout(function () { mark.classList.add('show'); }, SHOW_MARK),
     setTimeout(finish, END)
   ];
 
@@ -265,34 +284,34 @@
         "text-align": "center"
       },
       "title": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-weight": "400",
         "font-size": "1.7rem",
         "color": "#2A271F"
       },
       "price": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-size": "1.1rem",
         "color": "#2A271F"
       },
       "description": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-size": ".95rem",
         "line-height": "1.6",
         "color": "#55503F"
       },
       "compareAt": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-size": ".85rem",
         "color": "#55503F"
       },
       "unitPrice": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-size": ".85rem",
         "color": "#55503F"
       },
       "button": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-size": "12px",
         "font-weight": "400",
         "letter-spacing": "0.25em",
@@ -310,7 +329,7 @@
     "contents": {
       "img": false,
       "imgWithCarousel": false,
-      "description": true
+      "description": false
     },
     "width": "100%",
     "text": {
@@ -333,7 +352,7 @@
         }
       },
       "button": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "text-transform": "uppercase",
         "letter-spacing": "0.2em",
         "color": "#F4EFE3",
@@ -343,25 +362,25 @@
         ":focus": { "background-color": "#B08F45" }
       },
       "title": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-weight": "500",
         "font-size": "26px",
         "color": "#2A271F"
       },
       "price": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-weight": "normal",
         "font-size": "18px",
         "color": "#2A271F"
       },
       "compareAt": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-weight": "normal",
         "font-size": "15.3px",
         "color": "#55503F"
       },
       "unitPrice": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-weight": "normal",
         "font-size": "15.3px",
         "color": "#55503F"
@@ -374,7 +393,7 @@
   "cart": {
     "styles": {
       "button": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "font-size": "12px",
         "letter-spacing": "0.2em",
         "text-transform": "uppercase",
@@ -390,7 +409,7 @@
   "toggle": {
     "styles": {
       "toggle": {
-        "font-family": "Outfit, sans-serif",
+        "font-family": "Poppins, sans-serif",
         "background-color": "#2A271F",
         ":hover": { "background-color": "#4a4636" },
         ":focus": { "background-color": "#4a4636" }

@@ -1,73 +1,76 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impressum — Can Limoncello</title>
+<title>Imprint — Can Limoncello</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  :root{--serif:'Poppins',-apple-system,sans-serif;--sans:'Poppins',-apple-system,sans-serif}
+  body{background:#FFFFFF}
+  .topbar{display:flex;align-items:center;justify-content:center;padding:1.6rem 1.5rem;border-bottom:1px solid var(--line)}
+  .topbar img{width:min(18vw,110px);height:auto;display:block}
+  .legal{padding-top:3.5rem}
+  footer{background:#000000}
+</style>
 </head>
 <body>
 
-<nav id="nav" class="scrolled">
-  <a class="nav-mark" href="index.html">Can Limoncello</a>
-  <div class="nav-right">
-    <div class="lang" id="lang">
-      <button data-lang="de" class="active">DE</button>
-      <button data-lang="en">EN</button>
-      <button data-lang="es">ES</button>
-    </div>
-  </div>
-</nav>
+<div class="topbar">
+  <a href="index.html"><img src="assets/img/es-vedra-mark.svg" alt="Es Vedrà" width="85" height="28"></a>
+</div>
 
 <main class="legal">
-  <h1>Impressum</h1>
+  <h1>Imprint</h1>
 
-  <!-- EN-/ES-Fassung dieser Rechtsseite folgt; rechtlich von einer Fachperson prüfen lassen. -->
+  <p>Can Limoncello is a brand of The Cocktail GmbH. Ordering, payment and shipping are handled by
+     The Cocktail GmbH through their shop.</p>
 
-  <p>Can Limoncello ist eine Marke der The Cocktail GmbH. Vertrieb, Bestellung, Zahlung und Versand
-     erfolgen über die The Cocktail GmbH; diese Seite ist die Marken-Präsentation.</p>
-
-  <h2>Anbieter</h2>
+  <h2>Company</h2>
   <p>
     The Cocktail GmbH<br>
     Buckhauserstrasse 3B<br>
-    8048 Zürich<br>
-    Schweiz
+    8048 Zürich, Switzerland
   </p>
 
-  <h2>Kontakt</h2>
-  <p>
-    E-Mail: <a href="mailto:contact@thecocktail.ch">contact@thecocktail.ch</a><br>
-    Telefon: +41 77 539 73 42
-  </p>
-
-  <h2>Vertretungsberechtigte Personen</h2>
+  <h2>Represented by</h2>
   <p>Kaspar Fenkart, Jessica Kollar</p>
 
-  <h2>Registereintrag</h2>
+  <h2>Commercial register</h2>
+  <p>Canton of Zürich · UID: CHE-351.285.777</p>
+
+  <h2>Contact</h2>
   <p>
-    Handelsregister: Kanton Zürich<br>
-    Unternehmens-Identifikationsnummer (UID): CHE-351.285.777<br>
-    Mehrwertsteuernummer: CHE-351.285.777 MWST
+    Email: <a href="mailto:contact@thecocktail.ch">contact@thecocktail.ch</a><br>
+    Phone: +41 77 539 73 42
   </p>
 
-  <h2>Verantwortlich für den Inhalt</h2>
-  <p>The Cocktail GmbH, vertreten durch Kaspar Fenkart und Jessica Kollar.</p>
-
-  <h2>Haftungsausschluss</h2>
-  <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt verlinkter Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
-
-  <a class="back" href="index.html" data-i18n="back_home">Zurück zur Startseite</a>
+  <a class="back" href="index.html">← Back to home</a>
 </main>
 
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/main.js"></script>
+<footer>
+  <div class="foot-grid">
+    <div>
+      <p class="foot-mark">Can Limoncello</p>
+      <p class="foot-tag">Lemons from Ibiza · Love from Switzerland</p>
+    </div>
+    <div class="foot-links">
+      <a href="https://www.instagram.com/canlimoncello" target="_blank" rel="noopener">Instagram</a>
+      <a href="impressum.html">Imprint</a>
+      <a href="datenschutz.html">Privacy</a>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span><span class="tanit">☽</span> &nbsp;Can Limoncello · Switzerland</span>
+    <span>Alcohol — sale only to persons over 18 years of age.</span>
+  </div>
+</footer>
 </body>
 </html>
