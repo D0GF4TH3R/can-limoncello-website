@@ -119,7 +119,8 @@
     <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="Old town street at golden hour" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="Cliffside terrace over the sea" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="Shaded beach lounge" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/cove-boat.jpg" alt="Hidden cove with boat" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/shaded-beach-bar.jpg" alt="Shaded beach bar" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/cliff-steps.jpg" alt="Steps down the cliff to the sea" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-tarmac.jpg" alt="Arrival on the Ibiza tarmac" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-cards.jpg" alt="Card game aboard the plane" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="Poolside chess" loading="eager"></figure>
@@ -127,17 +128,18 @@
     <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="Cafeteria terrace crowd" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="Woman in traditional dress by the fortress wall" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="Evening gathering" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/old-town-street-dusk.jpg" alt="Old town street at dusk" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/ibiza-church.jpg" alt="Ibiza old town church" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="White house terrace over the sea" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="Vintage motorbike on a dirt road" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="Vintage market street" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="Walking the old town street" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="Ice cream in the old town street" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/yacht-dj.jpg" alt="DJing on a yacht" loading="eager"></figure>
     <!-- Duplikat der Liste für nahtlosen Loop -->
     <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/cove-boat.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/shaded-beach-bar.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/cliff-steps.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-tarmac.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-cards.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="" loading="lazy"></figure>
@@ -145,12 +147,12 @@
     <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/old-town-street-dusk.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/ibiza-church.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-motorbike.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/yacht-dj.jpg" alt="" loading="lazy"></figure>
   </div>
   <div class="carousel-arrow" aria-hidden="true">↓</div>
 </div>
@@ -424,6 +426,43 @@
   }
 })();
 /*]]>*/
+</script>
+
+<!-- ============================================================
+     CART NOTE — Shopify rendert die Cart-Sidebar in einem eigenen
+     Iframe (frame-cart), daher per MutationObserver von aussen den
+     Hinweis direkt unter den Mengen-Stepper jeder Cart-Zeile setzen.
+     ============================================================ -->
+<script type="text/javascript">
+(function () {
+  function addNote(doc, container) {
+    if (container.nextElementSibling && container.nextElementSibling.classList.contains('cl-shipping-note')) return;
+    var note = doc.createElement('p');
+    note.className = 'cl-shipping-note';
+    note.textContent = 'Buy two for free shipping';
+    note.style.cssText = 'font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#B08F45;margin:14px 0 0;text-align:left;';
+    container.insertAdjacentElement('afterend', note);
+    var li = container.closest('.shopify-buy__cart-item');
+    if (li) {
+      var offset = container.getBoundingClientRect().left - li.getBoundingClientRect().left;
+      note.style.marginLeft = offset + 'px';
+    }
+  }
+  function scanCart() {
+    var cf = document.querySelector('iframe[name="frame-cart"]');
+    if (!cf) return;
+    var doc;
+    try { doc = cf.contentDocument; } catch (e) { return; }
+    if (!doc || !doc.body) return;
+    doc.querySelectorAll('.shopify-buy__quantity-container').forEach(function (c) { addNote(doc, c); });
+    if (!cf.__clObserved) {
+      cf.__clObserved = true;
+      new MutationObserver(scanCart).observe(doc.body, { childList: true, subtree: true });
+    }
+  }
+  new MutationObserver(scanCart).observe(document.documentElement, { childList: true, subtree: true });
+  scanCart();
+})();
 </script>
 </body>
 </html>
