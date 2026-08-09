@@ -67,8 +67,8 @@
   .landing-title h2{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,4.2vw,2.9rem);line-height:1.15;color:var(--ink)}
 
   /* ---------- BOTTLE ---------- */
-  .landing-bottle{display:flex;justify-content:center;padding:1rem 1.5rem clamp(2.5rem,6vw,4rem)}
-  .landing-bottle img{width:auto;height:clamp(440px,66vh,760px);max-width:100%;object-fit:contain}
+  .landing-bottle{display:flex;justify-content:center;padding:clamp(2.5rem,6vw,4rem) 1.5rem}
+  .landing-bottle img{width:auto;height:clamp(440px,70vh,780px);max-width:100%;object-fit:contain}
 
   /* ---------- STORY ---------- */
   .landing-story{max-width:560px;margin:0 auto;padding:0 1.5rem clamp(3rem,6vw,4.5rem);text-align:center}
@@ -462,6 +462,35 @@
   }
   new MutationObserver(scanCart).observe(document.documentElement, { childList: true, subtree: true });
   scanCart();
+})();
+</script>
+
+<!-- ============================================================
+     TITLE CASE FIX — Shopify liefert den Produkttitel als "CAN
+     Limoncello" (Datenquelle, nicht unser Code). Im Produkt-Iframe
+     per MutationObserver auf "Can" korrigieren.
+     ============================================================ -->
+<script type="text/javascript">
+(function () {
+  function fixTitle(el) {
+    if (el.dataset.clFixed) return;
+    el.textContent = el.textContent.replace(/^CAN\b/, 'Can');
+    el.dataset.clFixed = '1';
+  }
+  function scanTitles() {
+    document.querySelectorAll('iframe[name^="frame-product"]').forEach(function (pf) {
+      var doc;
+      try { doc = pf.contentDocument; } catch (e) { return; }
+      if (!doc || !doc.body) return;
+      doc.querySelectorAll('.shopify-buy__product__title').forEach(fixTitle);
+      if (!pf.__clTitleObserved) {
+        pf.__clTitleObserved = true;
+        new MutationObserver(scanTitles).observe(doc.body, { childList: true, subtree: true, characterData: true });
+      }
+    });
+  }
+  new MutationObserver(scanTitles).observe(document.documentElement, { childList: true, subtree: true });
+  scanTitles();
 })();
 </script>
 </body>
