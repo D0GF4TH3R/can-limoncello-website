@@ -293,34 +293,18 @@ window.addEventListener('pageshow', function (event) {
       storefrontAccessToken: token,
     });
 
-    // Die SDK merkt sich die Cart-ID dauerhaft in localStorage. Ist dieser
-    // Cart bereits durch einen abgeschlossenen Checkout ungültig geworden,
-    // liefert Shopify beim erneuten Abrufen null zurück — die SDK löscht
-    // die alte ID dann aber nicht selbst, wodurch "Checkout" nach einem
-    // Kauf dauerhaft kaputt bleibt. Daher vor der Initialisierung selbst
-    // prüfen und im Zweifel die verwaiste ID entfernen, damit ein neuer
-    // Warenkorb entsteht.
+    // Die SDK merkt sich die Cart-ID dauerhaft in localStorage und versucht,
+    // sie bei jedem Seitenaufruf wiederzuverwenden. Ein Cart, der bereits
+    // einmal zur Kasse gebracht wurde, bleibt dabei manchmal als Objekt
+    // abrufbar, aber der "Checkout"-Button funktioniert dann nicht mehr
+    // (kein Fehler, einfach keine Reaktion). Statt zu prüfen, ob der alte
+    // Cart noch gültig ist, daher bei jedem Aufruf der Startseite die
+    // gespeicherte ID verwerfen — jeder Besuch beginnt mit einem frischen,
+    // leeren Warenkorb.
     var storageKey = token + '.' + domain + '.checkoutId';
-    var storedId;
-    try { storedId = window.localStorage.getItem(storageKey); } catch (e) {}
+    try { window.localStorage.removeItem(storageKey); } catch (e) {}
 
-    function initUI() {
-      ShopifyBuy.UI.onReady(client).then(startComponent);
-    }
-
-    if (storedId) {
-      client.checkout.fetch(storedId).then(function (checkout) {
-        if (!checkout) {
-          try { window.localStorage.removeItem(storageKey); } catch (e) {}
-        }
-        initUI();
-      }).catch(function () {
-        try { window.localStorage.removeItem(storageKey); } catch (e) {}
-        initUI();
-      });
-    } else {
-      initUI();
-    }
+    ShopifyBuy.UI.onReady(client).then(startComponent);
 
     function startComponent(ui) {
       ui.createComponent('product', {
