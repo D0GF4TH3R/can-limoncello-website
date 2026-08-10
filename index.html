@@ -79,6 +79,10 @@ window.addEventListener('pageshow', function (event) {
   .carousel-arrow{position:absolute;left:50%;bottom:1.2rem;transform:translate(-50%,0);color:#F7F3E8;font-size:1.8rem;line-height:1;animation:arrow-bounce 1.8s ease-in-out infinite;pointer-events:none}
   @keyframes arrow-bounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
   @media(max-width:480px){.carousel{height:75vh}}
+  @media(min-width:900px){
+    .carousel-track{animation-duration:80s}
+    .carousel-track figure{width:min(50vw,620px)}
+  }
 
   /* ---------- TITLE ---------- */
   .landing-title{text-align:center;padding:clamp(3.5rem,8vw,6rem) 1.5rem 1rem}
@@ -137,43 +141,47 @@ window.addEventListener('pageshow', function (event) {
      ============================================================ -->
 <div class="carousel">
   <div class="carousel-track">
-    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="Old town street at golden hour" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="Cliffside terrace over the sea" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="Shaded beach lounge" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/shaded-beach-bar.jpg" alt="Shaded beach bar" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/cliff-steps.jpg" alt="Steps down the cliff to the sea" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/bottle-seaview.jpg" alt="Can Limoncello bottle with a view of Es Vedrà" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-tarmac.jpg" alt="Arrival on the Ibiza tarmac" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="Vintage market street" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/cliff-steps.jpg" alt="Steps down the cliff to the sea" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="Cafeteria terrace crowd" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="White house terrace over the sea" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="Walking the old town street" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/bottles-lineup.jpg" alt="Bottles of Can Limoncello" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-cards.jpg" alt="Card game aboard the plane" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/ibiza-church.jpg" alt="Ibiza old town church" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/yacht-dj.jpg" alt="DJing on a yacht" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="Woman in traditional dress by the fortress wall" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="Cliffside terrace over the sea" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="Evening gathering" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="Shaded beach lounge" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="Ice cream in the old town street" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="Poolside chess" loading="eager"></figure>
     <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="Hï Ibiza sign" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="Cafeteria terrace crowd" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="Woman in traditional dress by the fortress wall" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="Evening gathering" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/ibiza-church.jpg" alt="Ibiza old town church" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="White house terrace over the sea" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="Vintage market street" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="Walking the old town street" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="Ice cream in the old town street" loading="eager"></figure>
-    <figure><img src="assets/Ibiza%20images/yacht-dj.jpg" alt="DJing on a yacht" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="Old town street at golden hour" loading="eager"></figure>
+    <figure><img src="assets/Ibiza%20images/shaded-beach-bar.jpg" alt="Shaded beach bar" loading="eager"></figure>
     <!-- Duplikat der Liste für nahtlosen Loop -->
-    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/shaded-beach-bar.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/cliff-steps.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/bottle-seaview.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-tarmac.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/cliff-steps.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/bottles-lineup.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/vintage-plane-cards.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/ibiza-church.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/yacht-dj.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/cliffside-desk.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/beach-club-lounge.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/pool-chess.jpg" alt="" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-cafeteria-terrace.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-woman-shawl.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-party.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/ibiza-church.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/white-house-terrace.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-market-street.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-street-yatzi.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/vintage-icecream-bicycle.jpg" alt="" loading="lazy"></figure>
-    <figure><img src="assets/Ibiza%20images/yacht-dj.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/old-town-crowd.jpg" alt="" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/shaded-beach-bar.jpg" alt="" loading="lazy"></figure>
   </div>
   <div class="carousel-arrow" aria-hidden="true">↓</div>
 </div>
