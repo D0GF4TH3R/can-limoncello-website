@@ -55,7 +55,7 @@
   /* ---------- CAROUSEL ---------- */
   .carousel{width:100%;height:80vh;overflow:hidden;position:relative;background:var(--ink)}
   .carousel-track{display:flex;height:100%;width:max-content;animation:carousel-scroll 46s linear infinite}
-  .carousel-track figure{flex:0 0 auto;height:100%;width:min(88vw,960px)}
+  .carousel-track figure{flex:0 0 auto;height:100%;width:100vw}
   .carousel-track img{width:100%;height:100%;object-fit:cover;display:block}
   @keyframes carousel-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes carousel-scroll-reduced{0.0000%{transform:translateX(-0.0000%)} 4.1667%{transform:translateX(-0.0000%)} 5.5556%{transform:translateX(-2.7778%)} 9.7222%{transform:translateX(-2.7778%)} 11.1111%{transform:translateX(-5.5556%)} 15.2778%{transform:translateX(-5.5556%)} 16.6667%{transform:translateX(-8.3333%)} 20.8333%{transform:translateX(-8.3333%)} 22.2222%{transform:translateX(-11.1111%)} 26.3889%{transform:translateX(-11.1111%)} 27.7778%{transform:translateX(-13.8889%)} 31.9444%{transform:translateX(-13.8889%)} 33.3333%{transform:translateX(-16.6667%)} 37.5000%{transform:translateX(-16.6667%)} 38.8889%{transform:translateX(-19.4444%)} 43.0556%{transform:translateX(-19.4444%)} 44.4444%{transform:translateX(-22.2222%)} 48.6111%{transform:translateX(-22.2222%)} 50.0000%{transform:translateX(-25.0000%)} 54.1667%{transform:translateX(-25.0000%)} 55.5556%{transform:translateX(-27.7778%)} 59.7222%{transform:translateX(-27.7778%)} 61.1111%{transform:translateX(-30.5556%)} 65.2778%{transform:translateX(-30.5556%)} 66.6667%{transform:translateX(-33.3333%)} 70.8333%{transform:translateX(-33.3333%)} 72.2222%{transform:translateX(-36.1111%)} 76.3889%{transform:translateX(-36.1111%)} 77.7778%{transform:translateX(-38.8889%)} 81.9444%{transform:translateX(-38.8889%)} 83.3333%{transform:translateX(-41.6667%)} 87.5000%{transform:translateX(-41.6667%)} 88.8889%{transform:translateX(-44.4444%)} 93.0556%{transform:translateX(-44.4444%)} 94.4444%{transform:translateX(-47.2222%)} 98.6111%{transform:translateX(-47.2222%)} 100%{transform:translateX(-50%)}}
@@ -88,6 +88,7 @@
 
   @media(prefers-reduced-motion: reduce){
     .carousel{height:80vh}
+    .carousel-track figure{width:min(88vw,960px)}
     .carousel-track{animation:carousel-scroll-reduced 72s ease-in-out infinite}
     .carousel-arrow{animation:none}
     #intro > p, #intro .intro-mark, #intro{transition:none}
