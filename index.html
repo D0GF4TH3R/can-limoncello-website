@@ -530,5 +530,60 @@ window.addEventListener('pageshow', function (event) {
   scanTitles();
 })();
 </script>
+
+<!-- ============================================================
+     CHECKOUT FIX — Der "Checkout"-Button der von Shopify unter
+     sdks.shopifycdn.com/buy-button/latest/ gehosteten SDK löst bei
+     uns aus unbekanntem Grund keine Navigation mehr aus: die SDK
+     loggt zwar ihr eigenes Klick-Telemetrie-Event, aber danach
+     folgt weder eine Weiterleitung noch ein Fehler noch ein
+     Netzwerk-Request — vermutlich ein Bug in deren Skript (das
+     "latest" ist und sich ohne unser Zutun ändern kann). Die
+     Storefront-API selbst funktioniert nachweislich einwandfrei.
+     Daher hier den Klick selbst behandeln: den von der SDK
+     verwalteten Cart frisch abrufen und direkt zu dessen webUrl
+     weiterleiten, statt uns auf den kaputten SDK-Handler zu
+     verlassen.
+     ============================================================ -->
+<script type="text/javascript">
+(function () {
+  var domain = 'xy311a-ax.myshopify.com';
+  var token = 'acfef6dc81a838c3c5ceb0c46d0a569f';
+  var storageKey = token + '.' + domain + '.checkoutId';
+
+  function goToCheckout() {
+    var id;
+    try { id = window.localStorage.getItem(storageKey); } catch (e) {}
+    if (!id || !window.ShopifyBuy) return;
+    var client = ShopifyBuy.buildClient({ domain: domain, storefrontAccessToken: token });
+    client.checkout.fetch(id).then(function (checkout) {
+      if (checkout && checkout.webUrl) {
+        window.top.location.href = checkout.webUrl;
+      }
+    });
+  }
+
+  function wireButton(btn) {
+    if (btn.__clWired) return;
+    btn.__clWired = true;
+    btn.addEventListener('click', goToCheckout);
+  }
+
+  function scanCheckoutButtons() {
+    document.querySelectorAll('iframe[name="frame-cart"]').forEach(function (cf) {
+      var doc;
+      try { doc = cf.contentDocument; } catch (e) { return; }
+      if (!doc || !doc.body) return;
+      doc.querySelectorAll('.shopify-buy__btn--cart-checkout').forEach(wireButton);
+      if (!cf.__clCheckoutObserved) {
+        cf.__clCheckoutObserved = true;
+        new MutationObserver(scanCheckoutButtons).observe(doc.body, { childList: true, subtree: true });
+      }
+    });
+  }
+  new MutationObserver(scanCheckoutButtons).observe(document.documentElement, { childList: true, subtree: true });
+  scanCheckoutButtons();
+})();
+</script>
 </body>
 </html>
