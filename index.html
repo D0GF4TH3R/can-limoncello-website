@@ -286,11 +286,43 @@ window.addEventListener('pageshow', function (event) {
     script.onload = ShopifyBuyInit;
   }
   function ShopifyBuyInit() {
+    var domain = 'xy311a-ax.myshopify.com';
+    var token = 'acfef6dc81a838c3c5ceb0c46d0a569f';
     var client = ShopifyBuy.buildClient({
-      domain: 'xy311a-ax.myshopify.com',
-      storefrontAccessToken: 'acfef6dc81a838c3c5ceb0c46d0a569f',
+      domain: domain,
+      storefrontAccessToken: token,
     });
-    ShopifyBuy.UI.onReady(client).then(function (ui) {
+
+    // Die SDK merkt sich die Cart-ID dauerhaft in localStorage. Ist dieser
+    // Cart bereits durch einen abgeschlossenen Checkout ungültig geworden,
+    // liefert Shopify beim erneuten Abrufen null zurück — die SDK löscht
+    // die alte ID dann aber nicht selbst, wodurch "Checkout" nach einem
+    // Kauf dauerhaft kaputt bleibt. Daher vor der Initialisierung selbst
+    // prüfen und im Zweifel die verwaiste ID entfernen, damit ein neuer
+    // Warenkorb entsteht.
+    var storageKey = token + '.' + domain + '.checkoutId';
+    var storedId;
+    try { storedId = window.localStorage.getItem(storageKey); } catch (e) {}
+
+    function initUI() {
+      ShopifyBuy.UI.onReady(client).then(startComponent);
+    }
+
+    if (storedId) {
+      client.checkout.fetch(storedId).then(function (checkout) {
+        if (!checkout) {
+          try { window.localStorage.removeItem(storageKey); } catch (e) {}
+        }
+        initUI();
+      }).catch(function () {
+        try { window.localStorage.removeItem(storageKey); } catch (e) {}
+        initUI();
+      });
+    } else {
+      initUI();
+    }
+
+    function startComponent(ui) {
       ui.createComponent('product', {
         id: '15833442255222',
         node: document.getElementById('product-component-1784379987175'),
@@ -443,7 +475,7 @@ window.addEventListener('pageshow', function (event) {
   }
 },
       });
-    });
+    }
   }
 })();
 /*]]>*/
