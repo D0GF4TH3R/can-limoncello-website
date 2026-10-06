@@ -213,6 +213,10 @@ window.addEventListener('pageshow', function (event) {
   .gallery-track figure{flex:0 0 auto;height:clamp(300px,46vh,520px);aspect-ratio:3/4;overflow:hidden}
   .gallery-track img{width:100%;height:100%;object-fit:cover;display:block}
   @keyframes gallery-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  /* Reduce Motion (z. B. iPhone-Einstellung): Galerie läuft trotzdem, aber Bild für Bild —
+     3.5s stehen, 1s gleiten. Keyframes gelten für 12 Bilder; bei Änderung der
+     Bilderzahl neu berechnen (Schritt = 50% / Anzahl). */
+  @keyframes gallery-scroll-reduced{0.0000%{transform:translateX(-0.0000%)} 6.4815%{transform:translateX(-0.0000%)} 8.3333%{transform:translateX(-4.1667%)} 14.8148%{transform:translateX(-4.1667%)} 16.6667%{transform:translateX(-8.3333%)} 23.1481%{transform:translateX(-8.3333%)} 25.0000%{transform:translateX(-12.5000%)} 31.4815%{transform:translateX(-12.5000%)} 33.3333%{transform:translateX(-16.6667%)} 39.8148%{transform:translateX(-16.6667%)} 41.6667%{transform:translateX(-20.8333%)} 48.1481%{transform:translateX(-20.8333%)} 50.0000%{transform:translateX(-25.0000%)} 56.4815%{transform:translateX(-25.0000%)} 58.3333%{transform:translateX(-29.1667%)} 64.8148%{transform:translateX(-29.1667%)} 66.6667%{transform:translateX(-33.3333%)} 73.1481%{transform:translateX(-33.3333%)} 75.0000%{transform:translateX(-37.5000%)} 81.4815%{transform:translateX(-37.5000%)} 83.3333%{transform:translateX(-41.6667%)} 89.8148%{transform:translateX(-41.6667%)} 91.6667%{transform:translateX(-45.8333%)} 98.1481%{transform:translateX(-45.8333%)} 100%{transform:translateX(-50%)}}
 
   /* ---------- FOOTER — nach Dom Pérignon: Wortmarke + "Stay in touch"
      oben, Link-Gruppen in Spalten, unten Hinweis + Rechtslinks.
@@ -256,8 +260,7 @@ window.addEventListener('pageshow', function (event) {
     .band-frame{clip-path:none}
     .band video{transform:none}
     .band blockquote{opacity:1;transform:none}
-    .gallery{overflow-x:auto}
-    .gallery-track{animation:none}
+    .gallery-track{animation:gallery-scroll-reduced 54s ease-in-out infinite}
     .chapter .frame img{transition:none}
     #intro > p, #intro .intro-mark, #intro{transition:none}
   }
@@ -405,6 +408,7 @@ window.addEventListener('pageshow', function (event) {
     <figure><img src="assets/Ibiza%20images/bottle-tidepool.jpg" alt="Can Limoncello bottle by the water" loading="lazy"></figure>
     <figure><img src="assets/img/gallery-anita.jpg" alt="Can Limoncello at Bar Anita" loading="lazy"></figure>
     <figure><img src="assets/img/gallery-party.jpg" alt="Summer party in a garden with bougainvillea" loading="lazy"></figure>
+    <figure><img src="assets/Ibiza%20images/mountain-party-friends.jpg" alt="Two friends with Can Limoncello at a summer party" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/bottles-lineup.jpg" alt="Bottles of Can Limoncello" loading="lazy"></figure>
     <figure><img src="assets/img/porxo.jpg" alt="White arches and steps" loading="lazy"></figure>
     <figure><img src="assets/Ibiza%20images/bottle-moody-taverna.jpg" alt="Can Limoncello bottle in a moody taverna" loading="lazy"></figure>
@@ -417,6 +421,7 @@ window.addEventListener('pageshow', function (event) {
     <figure aria-hidden="true"><img src="assets/Ibiza%20images/bottle-tidepool.jpg" alt="" loading="lazy"></figure>
     <figure aria-hidden="true"><img src="assets/img/gallery-anita.jpg" alt="" loading="lazy"></figure>
     <figure aria-hidden="true"><img src="assets/img/gallery-party.jpg" alt="" loading="lazy"></figure>
+    <figure aria-hidden="true"><img src="assets/Ibiza%20images/mountain-party-friends.jpg" alt="" loading="lazy"></figure>
     <figure aria-hidden="true"><img src="assets/Ibiza%20images/bottles-lineup.jpg" alt="" loading="lazy"></figure>
     <figure aria-hidden="true"><img src="assets/img/porxo.jpg" alt="" loading="lazy"></figure>
     <figure aria-hidden="true"><img src="assets/Ibiza%20images/bottle-moody-taverna.jpg" alt="" loading="lazy"></figure>
