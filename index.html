@@ -159,7 +159,7 @@ window.addEventListener('pageshow', function (event) {
   .buy-fallback{font-family:sans-serif;text-align:center;font-size:14px;line-height:16.8px;color:#4C4C4C}
   .bf-price{font-size:15.4px;line-height:18.48px;color:#2A271F;margin:0 0 15px}
   .bf-tier{display:inline-block;color:#B08F45;border:1px solid #B08F45;padding:10px 18px 11px;margin:14px 0 2px;line-height:1.35}
-  .bf-tier-label{display:block;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;margin-bottom:3px}
+  .bf-tier-label{display:block;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
   .bf-tier-offer{display:block;font-size:15px;font-weight:500;letter-spacing:.02em}
   .bf-btn-line{margin:20px 0 0}
   .bf-btn{font-family:sans-serif;font-size:12px;line-height:14.4px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:#F4EFE3;background:#2A271F;border:0;border-radius:0;padding:16px 34px;cursor:pointer;transition:background .3s,color .3s}
@@ -359,7 +359,7 @@ window.addEventListener('pageshow', function (event) {
              übereinstimmen. -->
         <div class="buy-fallback" id="buyFallback">
           <p class="bf-price">CHF 40.00</p>
-          <p class="bf-tier-line"><span class="bf-tier"><span class="bf-tier-label">From 6 bottles</span><span class="bf-tier-offer">CHF 26 per bottle + free shipping</span></span></p>
+          <p class="bf-tier-line"><span class="bf-tier"><span class="bf-tier-label"><span style="white-space:nowrap">For bars, restaurants</span> <span style="white-space:nowrap">and thirsty friends</span></span><span class="bf-tier-offer"><span style="white-space:nowrap">From 6 bottles: CHF 26 per bottle</span> <span style="white-space:nowrap">+ free shipping</span></span></span></p>
           <p class="bf-btn-line"><button type="button" class="bf-btn" id="buyFallbackBtn">Add to cart</button></p>
         </div>
         <div class="buy-live" id='product-component-1784379987175'></div>
@@ -912,7 +912,7 @@ window.addEventListener('pageshow', function (event) {
     if (container.nextElementSibling && container.nextElementSibling.classList.contains('cl-shipping-note')) return;
     var note = doc.createElement('p');
     note.className = 'cl-shipping-note';
-    note.textContent = 'From 6 bottles: CHF 26 per bottle + free shipping';
+    note.textContent = 'For bars, restaurants and thirsty friends — from 6 bottles: CHF 26 per bottle + free shipping';
     note.style.cssText = 'font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#B08F45;margin:14px 0 0;text-align:left;';
     container.insertAdjacentElement('afterend', note);
     var li = container.closest('.shopify-buy__cart-item');
@@ -947,8 +947,18 @@ window.addEventListener('pageshow', function (event) {
      ============================================================ -->
 <script type="text/javascript">
 (function () {
-  var LABEL = 'From 6 bottles';
-  var OFFER = 'CHF 26 per bottle + free shipping';
+  // Textstücke, die nie umbrechen — Zeilen brechen nur zwischen den Stücken
+  var LABEL = ['For bars, restaurants', 'and thirsty friends'];
+  var OFFER = ['From 6 bottles: CHF 26 per bottle', '+ free shipping'];
+  function fillChunks(doc, el, parts) {
+    parts.forEach(function (t, i) {
+      if (i) el.appendChild(doc.createTextNode(' '));
+      var c = doc.createElement('span');
+      c.style.whiteSpace = 'nowrap';
+      c.textContent = t;
+      el.appendChild(c);
+    });
+  }
   function addTierNote(doc, price) {
     var next = price.nextElementSibling;
     if (next && next.classList.contains('cl-tier-note')) return;
@@ -956,10 +966,10 @@ window.addEventListener('pageshow', function (event) {
     note.className = 'cl-tier-note';
     note.style.cssText = 'display:inline-block;font-family:Poppins,sans-serif;color:#B08F45;border:1px solid #B08F45;padding:10px 18px 11px;margin:14px 0 2px;text-align:center;line-height:1.35;';
     var label = doc.createElement('span');
-    label.textContent = LABEL;
-    label.style.cssText = 'display:block;font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;margin-bottom:3px;';
+    fillChunks(doc, label, LABEL);
+    label.style.cssText = 'display:block;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px;';
     var offer = doc.createElement('span');
-    offer.textContent = OFFER;
+    fillChunks(doc, offer, OFFER);
     offer.style.cssText = 'display:block;font-size:15px;font-weight:500;letter-spacing:.02em;';
     note.appendChild(label);
     note.appendChild(offer);
