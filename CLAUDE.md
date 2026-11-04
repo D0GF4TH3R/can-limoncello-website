@@ -26,6 +26,9 @@ Keine Rabatte, kein CTA-Lärm, keine Menschen beim Trinken (Schweizer Werberecht
 
 ## Struktur
 - `index.html` — Startseite (Hero-Video, Welt, Limoncello, Ritual, Brief)
+- `limoncello.html` — Produktseite nach Dom-Pérignon-Vorbild: Foto-Slider + Kaufpanel, darunter Blöcke mit Parallax-Fotos; 26% vol. Einziger Ort mit Shopify-Kaufbutton
+- `assets/css/site.css` — gemeinsame Styles beider Seiten (Farben, Menü, Kaufbereich, Footer)
+- `assets/js/shop.js` — Shopify-Kaufbereich (nur Produktseite; Startseite hat nur Teaser + "Shop now") (Button, Platzhalter, Mengenpreis, Warenkorb, Checkout-Fix). Preis CHF 40 steht zusätzlich als Platzhalter im HTML + im JSON-LD von limoncello.html
 - `impressum.html`, `datenschutz.html` — Rechtsseiten, Platzhalter `[[…]]` mit Partner-Daten füllen
   (AGB/Widerruf wurden entfernt — siehe Vertriebsmodell oben)
 - `assets/css/style.css` — gesamtes Styling; Farbvariablen oben in `:root`

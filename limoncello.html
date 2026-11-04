@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can Limoncello — Premium Limoncello · 26% vol.</title>
+<meta name="description" content="Can Limoncello: premium limoncello made with lemons from a farm in San Lorenzo, Ibiza, and aged to perfection in Switzerland. 26% vol. CHF 40 per bottle, from 6 bottles CHF 26 per bottle + free shipping.">
+<link rel="canonical" href="https://canlimoncello.com/limoncello.html">
+
+<!-- BFCACHE FIX — siehe index.html: nach Rückkehr aus dem Checkout neu laden -->
+<script type="text/javascript">
+window.addEventListener('pageshow', function (event) {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
+</script>
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- Open Graph / Link-Vorschau (WhatsApp, iMessage, Social) -->
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Can Limoncello">
+<meta property="og:url" content="https://canlimoncello.com/limoncello.html">
+<meta property="og:title" content="Can Limoncello — Premium Limoncello · 26% vol.">
+<meta property="og:description" content="Lemons from Ibiza, aged to perfection in Switzerland.">
+<meta property="og:image" content="https://canlimoncello.com/assets/img/web/product-bay.jpg">
+<meta property="og:image:alt" content="Can Limoncello bottle on a stone wall above a bay in Ibiza">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Produktdaten für Suchmaschinen und KI-Suche (Preis muss mit Shopify übereinstimmen) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Can Limoncello",
+  "brand": { "@type": "Brand", "name": "Can Limoncello" },
+  "description": "Premium limoncello made with lemons from a farm in San Lorenzo, Ibiza, and aged to perfection in Switzerland. 26% vol.",
+  "image": [
+    "https://canlimoncello.com/assets/img/web/product-bay.jpg",
+    "https://canlimoncello.com/assets/img/web/product-fishing-net.jpg",
+    "https://canlimoncello.com/assets/img/web/product-lineup.jpg"
+  ],
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Alcohol by volume", "value": "26%" }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://canlimoncello.com/limoncello.html",
+    "price": "40.00",
+    "priceCurrency": "CHF",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"></noscript>
+<link rel="preconnect" href="https://sdks.shopifycdn.com">
+<link rel="preconnect" href="https://xy311a-ax.myshopify.com">
+<script async id="shopifySdk" src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/site.css">
+
+<style>
+  /* ============================================================
+     PRODUKTSEITE — nach Dom Pérignon: oben Foto-Slider (2/3) +
+     schmales Kaufpanel (1/3), darunter wenige ruhige Blöcke mit
+     Parallax-Fotos (Fotos laufen beim Scrollen versetzt) und
+     einblendendem Text. Bewusst kürzer als das Vorbild.
+     ============================================================ */
+  body{background:#FFFFFF}
+  .pdp-h{font-family:var(--sans);font-weight:500;font-size:clamp(1rem,1.5vw,1.25rem);letter-spacing:.04em;line-height:1.25;text-transform:uppercase;color:var(--ink)}
+  .pdp-p{font-size:.84rem;line-height:1.75;color:var(--ink-soft)}
+  .pdp-p + .pdp-p{margin-top:1rem}
+  .pdp-small{font-size:.62rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
+
+  /* ---------- OBEN: Slider + Kaufpanel ---------- */
+  .pdp-top{display:grid;grid-template-columns:minmax(0,62fr) minmax(0,38fr);min-height:100svh;padding-top:64px}
+  .pdp-slider{position:relative;background:var(--limestone);height:calc(100svh - 64px);min-height:520px;overflow:hidden}
+  .pdp-slides{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+  .pdp-slides::-webkit-scrollbar{display:none}
+  .pdp-slides figure{flex:0 0 100%;height:100%;margin:0;scroll-snap-align:start}
+  .pdp-slides img{width:100%;height:100%;object-fit:cover;display:block}
+  .pdp-arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:2px;background:rgba(30,27,22,.55);color:#fff;font-size:14px;line-height:1;cursor:pointer;transition:background .3s}
+  .pdp-arrow:hover{background:rgba(30,27,22,.85)}
+  .pdp-arrow.prev{left:1.2rem}.pdp-arrow.next{right:1.2rem}
+  .pdp-dots{position:absolute;left:0;right:0;bottom:1.6rem;display:flex;justify-content:center;gap:.6rem}
+  .pdp-dots button{width:34px;height:14px;border:0;background:none;padding:0;cursor:pointer;position:relative}
+  .pdp-dots button::after{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:rgba(255,255,255,.45);transition:background .3s}
+  .pdp-dots button.on::after{background:#fff}
+
+  .pdp-panel{display:flex;flex-direction:column;justify-content:flex-end;padding:2.4rem clamp(1.4rem,3.4vw,3.4rem) clamp(2.4rem,6vh,4rem)}
+  .pdp-crumb{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;color:var(--ink);margin-bottom:1.6rem}
+  .pdp-crumb a{border-bottom:1px solid currentColor;padding-bottom:1px}
+  .pdp-panel h1{font-family:var(--serif);font-weight:200;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:.06em;line-height:1.05;text-transform:uppercase;color:var(--ink);margin-bottom:1.4rem}
+  .pdp-panel .landing-buy{margin:0}
+  .pdp-desc{margin-top:2.2rem}
+  .pdp-desc .pdp-small{color:var(--ink);margin-bottom:.8rem}
+  .pdp-note{margin-top:1rem;font-size:.74rem;color:var(--ink)}
+  .pdp-link{display:inline-block;margin-top:1.4rem;font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid currentColor;padding-bottom:2px}
+
+  /* ---------- BLÖCKE ---------- */
+  .ed{max-width:1240px;margin:0 auto;padding:clamp(6rem,12vw,10rem) clamp(1.2rem,5vw,4rem)}
+  .frame{position:relative;overflow:hidden;margin:0}
+  .frame img{width:100%;height:100%;object-fit:cover;display:block;transform:translateY(var(--py,0)) scale(1.16);will-change:transform}
+
+  /* A: Text links, grosses Foto rechts, kleines Foto überlappt */
+  .ed-a{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:clamp(1rem,3vw,2.6rem)}
+  .ed-a .ed-text{grid-column:1 / span 4}
+  .ed-a .ed-text .pdp-h{margin-bottom:1.4rem}
+  .ed-a .ed-media{grid-column:6 / span 7;position:relative;padding-bottom:12%}
+  .ed-a .ed-big{aspect-ratio:4/5}
+  .ed-a .ed-small{position:absolute;left:-14%;bottom:0;width:42%;aspect-ratio:4/3;box-shadow:0 30px 60px rgba(30,27,22,.12)}
+
+  /* B: Foto über die ganze Breite */
+  .ed-full{height:min(88vh,860px);min-height:420px}
+  .ed-full .frame{height:100%}
+  .ed-full img{object-position:70% 50%}
+
+  /* C: zentrierter Titel + Text */
+  .ed-c{max-width:640px;text-align:center}
+  .ed-c .pdp-h{margin-bottom:1.4rem}
+
+  /* D: Text links, Nahaufnahme rechts */
+  .ed-d{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:clamp(1rem,3vw,2.6rem);padding-top:0}
+  .ed-d .ed-text{grid-column:2 / span 4}
+  .ed-d .ed-text .pdp-h{margin-bottom:1.4rem}
+  .ed-d .ed-big{grid-column:7 / span 6;aspect-ratio:3/4}
+  .ed-d .pdp-link{margin-top:1.8rem}
+
+  @media(max-width:900px){
+    .pdp-top{grid-template-columns:1fr;min-height:0}
+    .pdp-slider{height:auto;min-height:0;aspect-ratio:4/5}
+    .pdp-slides img{object-position:50% 45%}
+    .pdp-panel{padding:1.8rem 1.2rem 2.6rem}
+    .pdp-arrow{display:none}
+    .ed{padding:4.5rem 1.2rem}
+    .ed-a,.ed-d{grid-template-columns:1fr;row-gap:2.4rem}
+    .ed-a .ed-text,.ed-a .ed-media,.ed-d .ed-text,.ed-d .ed-big{grid-column:auto}
+    .ed-a .ed-media{padding-bottom:18%}
+    .ed-a .ed-small{left:auto;right:-4%;width:52%}
+    .ed-full{height:62vh}
+    .ed-d{padding-top:0}
+  }
+
+  @media(prefers-reduced-motion: reduce){
+    .frame img{transform:none}
+    .pdp-slides{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV — hier immer weiss (kein dunkles Hero-Video dahinter) -->
+<header class="site-nav scrolled" id="siteNav">
+  <nav class="nav-links" aria-label="Sections">
+    <a href="limoncello.html" aria-current="page">The Limoncello</a>
+    <a href="index.html#island">The Island</a>
+  </nav>
+  <a class="nav-logo" href="index.html" aria-label="Can Limoncello — Home"><img src="assets/img/es-vedra-mark.svg" alt="Es Vedrà" width="85" height="28"></a>
+  <a class="nav-shop" href="#buyBox">Shop</a>
+</header>
+
+<main>
+
+  <!-- OBEN — Foto-Slider links, Kaufpanel rechts -->
+  <section class="pdp-top">
+    <div class="pdp-slider" aria-roledescription="carousel" aria-label="Photos of Can Limoncello">
+      <div class="pdp-slides" id="pdpSlides">
+        <figure><img src="assets/img/web/product-bay.jpg" alt="Can Limoncello bottle on a stone wall above a bay in Ibiza"></figure>
+        <figure><img src="assets/img/web/product-fishing-net.jpg" alt="Can Limoncello bottle in front of a fishing net" loading="lazy"></figure>
+        <figure><img src="assets/img/web/product-rockpool.jpg" alt="Can Limoncello bottle in a tidal rock pool" loading="lazy"></figure>
+      </div>
+      <button class="pdp-arrow prev" type="button" aria-label="Previous photo">&#8249;</button>
+      <button class="pdp-arrow next" type="button" aria-label="Next photo">&#8250;</button>
+      <div class="pdp-dots" id="pdpDots"></div>
+    </div>
+
+    <div class="pdp-panel">
+      <div class="pdp-crumb pdp-small"><span>The Limoncello · 26% vol.</span><a href="index.html">Back</a></div>
+      <h1>Can Limoncello</h1>
+
+      <!-- SHOPIFY BUY BUTTON (Logik in assets/js/shop.js). Platzhalter-Preis muss mit Shopify übereinstimmen. -->
+      <div class="landing-buy" id="buyBox">
+        <div class="buy-fallback" id="buyFallback">
+          <p class="bf-price">CHF 40.00</p>
+          <p class="bf-tier-line"><span class="bf-tier"><span class="bf-tier-label"><span style="white-space:nowrap">For bars, restaurants</span> <span style="white-space:nowrap">and thirsty friends</span></span><span class="bf-tier-offer"><span style="white-space:nowrap">From 6 bottles: CHF 26 per bottle</span> <span style="white-space:nowrap">+ free shipping</span></span></span></p>
+          <p class="bf-btn-line"><button type="button" class="bf-btn" id="buyFallbackBtn">Add to cart</button></p>
+        </div>
+        <div class="buy-live" id='product-component-1784379987175'></div>
+      </div>
+
+      <div class="pdp-desc">
+        <p class="pdp-small">Description</p>
+        <p class="pdp-p">A premium limoncello made with divine lemons from the island of the goddess Tanit — grown on a farm in San Lorenzo, Ibiza, and aged to perfection in Switzerland.</p>
+        <p class="pdp-note">26% vol. · Serve well chilled, neat or over ice.</p>
+        <a class="pdp-link" href="#origin">Discover its origin</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- A — Herkunft: Text links, Hof-Foto rechts, Zitronen-Nahaufnahme überlappt -->
+  <section class="ed ed-a" id="origin">
+    <div class="ed-text rv">
+      <h2 class="pdp-h">From San Lorenzo, Ibiza</h2>
+      <p class="pdp-p">Our lemons grow on a farm in San Lorenzo, in the quiet green heart of Ibiza. They ripen slowly under the island sun — the island of the goddess Tanit, where every bottle begins.</p>
+    </div>
+    <div class="ed-media">
+      <figure class="frame ed-big" data-parallax="0.06"><img src="assets/img/web/farm-san-lorenzo.jpg" alt="Rows of citrus trees at the farm in San Lorenzo, Ibiza" loading="lazy"></figure>
+      <figure class="frame ed-small" data-parallax="0.16"><img src="assets/img/web/farm-lemons.jpg" alt="Lemons ripening on a branch" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <!-- B — Produktion über die ganze Breite -->
+  <section class="ed-full">
+    <figure class="frame" data-parallax="0.12"><img src="assets/img/web/production-hands.jpg" alt="Freshly cut lemon peels held by hand in Switzerland" loading="lazy"></figure>
+  </section>
+
+  <!-- C — zentrierter Text -->
+  <section class="ed ed-c rv">
+    <h2 class="pdp-h">Aged to perfection in Switzerland</h2>
+    <p class="pdp-p">In Switzerland, the peels are cut and prepared by hand and given time to rest until the limoncello reaches its golden balance — patient, precise and made with Swiss care.</p>
+  </section>
+
+  <!-- D — 26% vol.: Text links, Nahaufnahme rechts -->
+  <section class="ed ed-d">
+    <div class="ed-text rv">
+      <h2 class="pdp-h">26% vol.<br>Served ice cold</h2>
+      <p class="pdp-p">Golden, bright and smooth. Serve Can Limoncello well chilled, neat or over ice. Take a sip, close your eyes, and let Ibiza find you.</p>
+      <a class="pdp-link" href="#buyBox">Shop now</a>
+    </div>
+    <figure class="frame ed-big" data-parallax="0.08"><img src="assets/img/web/product-lineup.jpg" alt="Bottles of Can Limoncello in a row" loading="lazy"></figure>
+  </section>
+
+</main>
+
+<!-- FOOTER — identisch mit index.html -->
+<footer class="site-foot" id="siteFoot">
+  <div class="foot-wrap">
+    <div class="foot-top">
+      <div>
+        <svg class="foot-horizon" viewBox="0 0 85.08 28.38" aria-hidden="true">
+          <g fill="#FFFFFF">
+            <path d="M50.53,19.53c-2.13-.23-3.85.14-5.6-.4-5.82-1.81-4.77-7.33-7.59-8.84l-3.68-1.97-5.06-3.48c-2.19-1.11-4.41-1.52-6.84-1.98l-3.98,1.96c-.66.33-1.09,1.67-2.01,1.97l-.61,2.56c-.34,1.44-.28,3.16-1.27,4.31-.83.96-1.27,1.77-1.64,2.95-.47,1.54-2.35,2.24-3.51,3.34-6.22,5.86-3.49,9.4-7.93,8.19-1.62-2.62-.61-5.65,1.55-7.68,1.08-1.01,2.01-2.05,3.26-2.82,1.15-.72,2.59-1.51,3.05-2.71l2.1-5.46c.79-2.06,1.09-4.45,3.21-5.88,1.08-.73,2.76-1.4,3.69-2.17C19.41-.04,21.04-.26,23.1.24c6.19,1.52,5.88,1.65,11.49,4.29,1.23.58,2.23,1.69,2.92,2.88l2.99,1.14,3.02,3.63c.38.54.65,2.26.84,2.92,1.1,3.77,6.81-.12,9.18,1.34.81.5,1.67,2.04,1.95,2.44.28.4.71,1.71.71,1.71l2.28-2.04c.24-.33.85-2.62,1.02-2.76.17-.14,3.24-1.11,3.42-.96.18.14,1.88,4.6,1.88,4.6.39.95,1.22,2.37,1.97,3.09,1.24,1.04,2.69,1.65,2.93,3.74-3.44-.11-6.19-2.21-7.42-5.08l-.67,1.2c-1.09,1.38-5.48,1.51-8.63-.6-.64-.43-1.57-2.15-2.45-2.24"/>
+            <path d="M85.04,25.65c.28.26-1.16.87-5.12,2.29-.78.28-1.37.33-2.07-.05-1.06-.57-2.02-1.38-1.97-2.53,1.04.34,1.98.63,2.95.58,0,0,5.93-.55,6.21-.29"/>
+          </g>
+        </svg>
+        <p class="foot-word">Can Limoncello</p>
+        <p class="foot-motto">Lemons from Ibiza · Love from Switzerland</p>
+      </div>
+      <div class="foot-touch">
+        <p>Follow us on Instagram and stay in touch with Can Limoncello.</p>
+        <a class="line-link" href="https://www.instagram.com/canlimoncello" target="_blank" rel="noopener">Follow us</a>
+      </div>
+    </div>
+
+    <div class="foot-cols">
+      <div>
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="limoncello.html">The Limoncello</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="impressum.html">Imprint</a></li>
+          <li><a href="datenschutz.html">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Follow us</h3>
+        <a class="foot-insta" href="https://www.instagram.com/canlimoncello" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="foot-legal">
+      <span>Alcohol — sale only to persons over 18 years of age. Please enjoy responsibly.</span>
+      <nav aria-label="Legal">
+        <span>© 2026 Can Limoncello · Switzerland</span>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     SLIDER + SCROLL-EFFEKTE
+     - Slider: wischen/scrollen, Pfeile und Striche springen zum Foto.
+     - [data-parallax]: Foto läuft im Rahmen langsamer als die Seite.
+     - .rv: Text blendet beim Erscheinen ein.
+     ============================================================ -->
+<script type="text/javascript">
+(function () {
+  // Slider
+  var slides = document.getElementById('pdpSlides');
+  var figs = slides.querySelectorAll('figure');
+  var dots = document.getElementById('pdpDots');
+  figs.forEach(function (f, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Photo ' + (i + 1));
+    b.addEventListener('click', function () { go(i); });
+    dots.appendChild(b);
+  });
+  function current() { return Math.round(slides.scrollLeft / slides.clientWidth); }
+  function go(i) { i = (i + figs.length) % figs.length; slides.scrollTo({ left: i * slides.clientWidth }); }
+  function markDot() { var c = current(); [].forEach.call(dots.children, function (d, i) { d.classList.toggle('on', i === c); }); }
+  slides.addEventListener('scroll', markDot, { passive: true });
+  document.querySelector('.pdp-arrow.prev').addEventListener('click', function () { go(current() - 1); });
+  document.querySelector('.pdp-arrow.next').addEventListener('click', function () { go(current() + 1); });
+  markDot();
+
+  // Parallax + Einblenden
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var parallax = [].slice.call(document.querySelectorAll('[data-parallax]'));
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    parallax.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      var speed = parseFloat(el.dataset.parallax) || 0.1;
+      var offset = (r.top + r.height / 2 - vh / 2) * -speed;
+      var max = r.height * 0.07; // passt zum scale(1.16) des Fotos
+      el.style.setProperty('--py', Math.max(-max, Math.min(max, offset)).toFixed(1) + 'px');
+    });
+  }
+  if (!reduced) {
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+  var rv = document.querySelectorAll('.rv');
+  if (reduced || !('IntersectionObserver' in window)) { rv.forEach(function (el) { el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  rv.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+<script src="assets/js/shop.js"></script>
+</body>
+</html>

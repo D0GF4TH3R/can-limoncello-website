@@ -48,11 +48,8 @@ window.addEventListener('pageshow', function (event) {
 <!-- Schrift lädt ohne das Rendern zu blockieren; nur die genutzten Schnitte -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"></noscript>
-<!-- Shopify Buy Button so früh wie möglich laden (Init weiter unten wartet darauf) -->
-<link rel="preconnect" href="https://sdks.shopifycdn.com">
-<link rel="preconnect" href="https://xy311a-ax.myshopify.com">
-<script async id="shopifySdk" src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/site.css">
 
 <style>
   /* ============================================================
@@ -61,32 +58,7 @@ window.addEventListener('pageshow', function (event) {
      und scroll-gesteuerte Effekte (siehe Script "SCROLL-EFFEKTE").
      Palette: Weiss · Kalkstein · Gold · Zitrone · Bougainvillea.
      ============================================================ */
-  :root{
-    --serif:'Poppins',-apple-system,sans-serif;
-    --sans:'Poppins',-apple-system,sans-serif;
-    --ink:#1E1B16;
-    --ink-soft:#5A5446;
-    --gold:#B08F45;
-    --lemon:#E9C946;
-    --lemon-wash:#FBF5DC;
-    --limestone:#F8F5EE;
-    --bougainvillea:#A3367F;
-    --line:rgba(30,27,22,.12);
-    --on-dark:#FFFFFF;
-    --ease:cubic-bezier(.2,.65,.2,1);
-  }
   html.intro-lock, html.intro-lock body{overflow:hidden;height:100%}
-  body{background:#FFFFFF}
-  section{padding:0}
-
-  .label{font-family:var(--sans);font-size:.66rem;font-weight:500;letter-spacing:.34em;text-transform:uppercase}
-  .label-gold{color:var(--gold)}
-  .label-bloom{color:var(--bougainvillea)}
-
-  /* Text-Link mit Linie — statt lauter Buttons */
-  .line-link{display:inline-flex;align-items:center;gap:.9rem;font-family:var(--sans);font-size:.66rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:inherit}
-  .line-link::after{content:"";width:42px;height:1px;background:currentColor;transition:width .5s var(--ease)}
-  .line-link:hover::after{width:72px}
 
   /* ---------- INTRO ---------- */
   #intro{position:fixed;inset:0;z-index:9999;background:#FFFFFF;display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease}
@@ -100,17 +72,6 @@ window.addEventListener('pageshow', function (event) {
   .intro-skip{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);background:none;border:0;font-family:var(--sans);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);opacity:.45;cursor:pointer;padding:.5rem .7rem;transition:opacity .3s}
   .intro-skip:hover{opacity:.9}
 
-  /* ---------- NAV ---------- */
-  .site-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;padding:1.3rem clamp(1rem,4vw,3rem);color:var(--on-dark);transition:background .5s ease,color .5s ease,padding .5s ease,box-shadow .5s ease}
-  .site-nav.scrolled{background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--ink);padding:.85rem clamp(1rem,4vw,3rem);box-shadow:0 1px 0 var(--line)}
-  .site-nav .nav-links{position:static;display:flex;justify-content:flex-start;gap:2.2rem;padding:0;color:inherit;transition:none} /* style.css stylt jedes <nav> fixed */
-  .site-nav .nav-links a,.site-nav .nav-shop{font-family:var(--sans);font-size:.64rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;opacity:.9;transition:opacity .3s}
-  .site-nav .nav-links a:hover,.site-nav .nav-shop:hover{opacity:1}
-  .site-nav .nav-logo img{width:78px;height:auto;display:block;filter:brightness(0) invert(1);transition:filter .5s ease}
-  .site-nav.scrolled .nav-logo img{filter:none}
-  .site-nav .nav-shop{justify-self:end;display:inline-flex;align-items:center;gap:.6rem}
-  .site-nav .nav-shop::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--lemon)}
-  @media(max-width:640px){.site-nav .nav-links{visibility:hidden;overflow:hidden}.site-nav .nav-logo img{width:64px}}
 
   /* ---------- HERO — Triptychon aus Hochformat-Videos ----------
      --hero (0→1) wird beim Herausscrollen per JS gesetzt:
@@ -149,24 +110,13 @@ window.addEventListener('pageshow', function (event) {
   /* ---------- PRODUKT ---------- */
   .product{background:var(--limestone);padding:clamp(4rem,9vw,7.5rem) clamp(1.2rem,6vw,4.5rem)}
   .product-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,7vw,6.5rem);align-items:center}
-  .product-media{position:relative;aspect-ratio:2/3;max-height:88vh;width:100%;max-width:540px;justify-self:end;background:var(--lemon-wash)}
+  .product-media{display:block;position:relative;aspect-ratio:2/3;max-height:88vh;width:100%;max-width:540px;justify-self:end;background:var(--lemon-wash)}
   .product-media img{width:100%;height:100%;object-fit:cover;display:block}
   .product-info{max-width:430px;text-align:center}
   .product-info h2{margin:1.3rem 0 .5rem;font-family:var(--serif);font-weight:200;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
   .product-info .tagline{font-size:.86rem;color:var(--ink-soft);letter-spacing:.04em}
-  .landing-buy{position:relative;margin-top:2.2rem}
-  /* Platzhalter — Masse 1:1 wie im Shopify-Iframe (dort rendert die Systemschrift) */
-  .buy-fallback{font-family:sans-serif;text-align:center;font-size:14px;line-height:16.8px;color:#4C4C4C}
-  .bf-price{font-size:15.4px;line-height:18.48px;color:#2A271F;margin:0 0 15px}
-  .bf-tier{display:inline-block;color:#B08F45;border:1px solid #B08F45;padding:10px 18px 11px;margin:14px 0 2px;line-height:1.35}
-  .bf-tier-label{display:block;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
-  .bf-tier-offer{display:block;font-size:15px;font-weight:500;letter-spacing:.02em}
-  .bf-btn-line{margin:20px 0 0}
-  .bf-btn{font-family:sans-serif;font-size:12px;line-height:14.4px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:#F4EFE3;background:#2A271F;border:0;border-radius:0;padding:16px 34px;cursor:pointer;transition:background .3s,color .3s}
-  .bf-btn:hover{background:#B08F45;color:#2A271F}
-  .buy-live{position:absolute;top:0;left:0;right:0;opacity:0;pointer-events:none}
-  #buyBox.ready .buy-live{position:static;opacity:1;pointer-events:auto}
-  #buyBox.ready .buy-fallback{display:none}
+  .shop-now{display:inline-block;margin-top:2.2rem;padding:16px 44px;background:var(--ink);color:#F4EFE3;font-size:.68rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;transition:background .3s,color .3s}
+  .shop-now:hover{background:var(--gold);color:var(--ink)}
   @media(max-width:640px){
     .product{padding:2.6rem 1.2rem 2.8rem}
     .product-grid{gap:1.4rem}
@@ -175,7 +125,7 @@ window.addEventListener('pageshow', function (event) {
     .product-info h2{font-size:1.75rem;margin:.7rem 0 .4rem}
     .product-info h2 br{display:none}
     .product-info .tagline{font-size:.8rem}
-    .landing-buy{margin-top:1.3rem}
+    .shop-now{margin-top:1.6rem}
   }
   @media(max-width:820px){
     .product-grid{grid-template-columns:1fr}
@@ -242,39 +192,9 @@ window.addEventListener('pageshow', function (event) {
      Bilderzahl neu berechnen (Schritt = 50% / Anzahl). */
   @keyframes gallery-scroll-reduced{0.0000%{transform:translateX(-0.0000%)} 6.4815%{transform:translateX(-0.0000%)} 8.3333%{transform:translateX(-4.1667%)} 14.8148%{transform:translateX(-4.1667%)} 16.6667%{transform:translateX(-8.3333%)} 23.1481%{transform:translateX(-8.3333%)} 25.0000%{transform:translateX(-12.5000%)} 31.4815%{transform:translateX(-12.5000%)} 33.3333%{transform:translateX(-16.6667%)} 39.8148%{transform:translateX(-16.6667%)} 41.6667%{transform:translateX(-20.8333%)} 48.1481%{transform:translateX(-20.8333%)} 50.0000%{transform:translateX(-25.0000%)} 56.4815%{transform:translateX(-25.0000%)} 58.3333%{transform:translateX(-29.1667%)} 64.8148%{transform:translateX(-29.1667%)} 66.6667%{transform:translateX(-33.3333%)} 73.1481%{transform:translateX(-33.3333%)} 75.0000%{transform:translateX(-37.5000%)} 81.4815%{transform:translateX(-37.5000%)} 83.3333%{transform:translateX(-41.6667%)} 89.8148%{transform:translateX(-41.6667%)} 91.6667%{transform:translateX(-45.8333%)} 98.1481%{transform:translateX(-45.8333%)} 100%{transform:translateX(-50%)}}
 
-  /* ---------- FOOTER — nach Dom Pérignon: Wortmarke + "Stay in touch"
-     oben, Link-Gruppen in Spalten, unten Hinweis + Rechtslinks.
-     Rein schwarz-weiss, keine Akzentfarben. ---------- */
-  footer.site-foot{background:#000000;color:rgba(255,255,255,.62);padding:clamp(4.5rem,8vw,7rem) clamp(1.2rem,5vw,4rem) 0;overflow:hidden}
-  .foot-wrap{max-width:1240px;margin:0 auto}
-  .foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:3rem;flex-wrap:wrap;padding-bottom:clamp(3rem,6vw,4.5rem);border-bottom:1px solid rgba(255,255,255,.14)}
-  .foot-horizon{display:block;width:118px;height:auto;margin-bottom:1.6rem}
-  .foot-word{font-family:var(--serif);font-weight:200;font-size:clamp(1.4rem,2.8vw,2.3rem);letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;line-height:1}
-  .foot-motto{margin-top:1.1rem;font-size:.6rem;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.55)}
-  .foot-touch{max-width:300px}
-  .foot-touch p{font-size:.85rem;line-height:1.7;color:rgba(255,255,255,.72)}
-  .foot-touch .line-link{margin-top:1.4rem;color:#FFFFFF}
-  .foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2.4rem;padding:clamp(3rem,6vw,4.5rem) 0}
-  .foot-cols h3{font-size:.6rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1.4rem}
-  .foot-cols ul{list-style:none;padding:0;margin:0}
-  .foot-cols li + li{margin-top:.75rem}
-  .foot-cols a{font-size:.88rem;font-weight:300;color:rgba(255,255,255,.82);transition:color .3s}
-  .foot-cols a:hover{color:#FFFFFF}
-  .foot-insta{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.3);border-radius:50%;transition:border-color .3s}
-  .foot-insta:hover{border-color:#FFFFFF}
-  .foot-insta svg{width:16px;height:16px}
-  .foot-legal{display:flex;justify-content:space-between;align-items:center;gap:1rem 2rem;flex-wrap:wrap;padding:1.6rem 0 2rem;border-top:1px solid rgba(255,255,255,.14);font-size:.6rem;letter-spacing:.12em;color:rgba(255,255,255,.5)}
-  .foot-legal nav{position:static;display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;padding:0;color:inherit;transition:none} /* style.css stylt jedes <nav> fixed */
-  .foot-legal a:hover{color:#FFFFFF}
-  @media(max-width:820px){.foot-cols{grid-template-columns:repeat(2,1fr)}}
 
-  /* ---------- REVEAL ---------- */
-  .rv{opacity:0;transform:translateY(28px);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
-  .rv.in{opacity:1;transform:none}
-  .rv-d1{transition-delay:.15s}.rv-d2{transition-delay:.3s}
 
   @media(prefers-reduced-motion: reduce){
-    .rv{opacity:1;transform:none;transition:none}
     .mask{clip-path:none;transition:none}
     .mask img{transform:none}
     .manifest h2 .w{opacity:1}
@@ -307,11 +227,11 @@ window.addEventListener('pageshow', function (event) {
 <!-- NAV — transparent über dem Hero, weiss nach dem Scrollen -->
 <header class="site-nav" id="siteNav">
   <nav class="nav-links" aria-label="Sections">
-    <a href="#limoncello">The Limoncello</a>
+    <a href="limoncello.html">The Limoncello</a>
     <a href="#island">The Island</a>
   </nav>
   <a class="nav-logo" href="#top" aria-label="Can Limoncello"><img src="assets/img/es-vedra-mark.svg" alt="Es Vedrà" width="85" height="28"></a>
-  <a class="nav-shop" href="#limoncello">Shop</a>
+  <a class="nav-shop" href="limoncello.html">Shop</a>
 </header>
 
 <!-- ============================================================
@@ -340,30 +260,18 @@ window.addEventListener('pageshow', function (event) {
 </section>
 
 <!-- ============================================================
-     PRODUKT — Flaschenbild links, Info + Shopify-Button rechts.
+     PRODUKT — Teaser: Flaschenbild, Name, eine Zeile, "Shop now" → Produktseite.
      ============================================================ -->
 <section class="product" id="limoncello">
   <div class="product-grid">
-    <div class="product-media mask" data-parallax="0.08">
+    <a class="product-media mask" href="limoncello.html" data-parallax="0.08" aria-label="Can Limoncello — product details">
       <img data-src="assets/img/web/bottle-bay.jpg" alt="Can Limoncello bottle on a stone wall above a bay in Ibiza">
-    </div>
+    </a>
     <div class="product-info rv rv-d1">
       <p class="label label-gold">The Limoncello</p>
-      <h2>Can <br>Limoncello</h2>
-      <p class="tagline">A premium limoncello made with divine lemons from the island of the goddess Tanit.</p>
-      <!-- SHOPIFY BUY BUTTON — Produkt-Komponente, Init weiter unten -->
-      <div class="landing-buy" id="buyBox">
-        <!-- Sofort sichtbarer Nachbau von Preis, Mengenpreis und Button. Wird
-             unsichtbar gegen den echten Shopify-Button getauscht, sobald dieser
-             geladen ist (siehe Script MENGENPREIS). Preis muss mit Shopify
-             übereinstimmen. -->
-        <div class="buy-fallback" id="buyFallback">
-          <p class="bf-price">CHF 40.00</p>
-          <p class="bf-tier-line"><span class="bf-tier"><span class="bf-tier-label"><span style="white-space:nowrap">For bars, restaurants</span> <span style="white-space:nowrap">and thirsty friends</span></span><span class="bf-tier-offer"><span style="white-space:nowrap">From 6 bottles: CHF 26 per bottle</span> <span style="white-space:nowrap">+ free shipping</span></span></span></p>
-          <p class="bf-btn-line"><button type="button" class="bf-btn" id="buyFallbackBtn">Add to cart</button></p>
-        </div>
-        <div class="buy-live" id='product-component-1784379987175'></div>
-      </div>
+      <h2><a href="limoncello.html">Can <br>Limoncello</a></h2>
+      <p class="tagline">Lemons from Ibiza, aged to perfection in Switzerland.</p>
+      <a class="shop-now" href="limoncello.html">Shop now</a>
     </div>
   </div>
 </section>
@@ -481,6 +389,12 @@ window.addEventListener('pageshow', function (event) {
     </div>
 
     <div class="foot-cols">
+      <div>
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="limoncello.html">The Limoncello</a></li>
+        </ul>
+      </div>
       <div>
         <h3>Legal</h3>
         <ul>
@@ -689,415 +603,6 @@ window.addEventListener('pageshow', function (event) {
 })();
 </script>
 
-<!-- ============================================================
-     SHOPIFY BUY BUTTON — Init. Selbe Produkt-ID/Domain/Token wie
-     im Snippet, Design (Outfit/Ink/Gold, zentriert) angepasst.
-     ============================================================ -->
-<script type="text/javascript">
-/*<![CDATA[*/
-(function () {
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  if (window.ShopifyBuy) {
-    if (window.ShopifyBuy.UI) {
-      ShopifyBuyInit();
-    } else {
-      loadScript();
-    }
-  } else {
-    loadScript();
-  }
-  function loadScript() {
-    // Das SDK wird schon im <head> asynchron geladen — nur noch auf dessen Ende warten.
-    var early = document.getElementById('shopifySdk');
-    if (early) {
-      early.addEventListener('load', ShopifyBuyInit);
-      early.addEventListener('error', function () { early.removeAttribute('id'); loadScript(); });
-      return;
-    }
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = scriptURL;
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-    script.onload = ShopifyBuyInit;
-  }
-  function ShopifyBuyInit() {
-    var domain = 'xy311a-ax.myshopify.com';
-    var token = 'acfef6dc81a838c3c5ceb0c46d0a569f';
-    var client = ShopifyBuy.buildClient({
-      domain: domain,
-      storefrontAccessToken: token,
-    });
-
-    // Die SDK merkt sich die Cart-ID dauerhaft in localStorage und versucht,
-    // sie bei jedem Seitenaufruf wiederzuverwenden. Ein Cart, der bereits
-    // einmal zur Kasse gebracht wurde, bleibt dabei manchmal als Objekt
-    // abrufbar, aber der "Checkout"-Button funktioniert dann nicht mehr
-    // (kein Fehler, einfach keine Reaktion). Statt zu prüfen, ob der alte
-    // Cart noch gültig ist, daher bei jedem Aufruf der Startseite die
-    // gespeicherte ID verwerfen — jeder Besuch beginnt mit einem frischen,
-    // leeren Warenkorb.
-    var storageKey = token + '.' + domain + '.checkoutId';
-    try { window.localStorage.removeItem(storageKey); } catch (e) {}
-
-    ShopifyBuy.UI.onReady(client).then(startComponent);
-
-    function startComponent(ui) {
-      ui.createComponent('product', {
-        id: '15833442255222',
-        node: document.getElementById('product-component-1784379987175'),
-        moneyFormat: 'CHF%20%7B%7Bamount%7D%7D',
-        options: {
-  "product": {
-    "styles": {
-      "product": {
-        "@media (min-width: 601px)": {
-          "max-width": "100%",
-          "margin-left": "0",
-          "margin-bottom": "0"
-        },
-        "text-align": "center"
-      },
-      "title": {
-        "font-family": "Poppins, sans-serif",
-        "font-weight": "400",
-        "font-size": "1.7rem",
-        "color": "#2A271F"
-      },
-      "price": {
-        "font-family": "Poppins, sans-serif",
-        "font-size": "1.1rem",
-        "color": "#2A271F"
-      },
-      "description": {
-        "font-family": "Poppins, sans-serif",
-        "font-size": ".95rem",
-        "line-height": "1.6",
-        "color": "#55503F"
-      },
-      "compareAt": {
-        "font-family": "Poppins, sans-serif",
-        "font-size": ".85rem",
-        "color": "#55503F"
-      },
-      "unitPrice": {
-        "font-family": "Poppins, sans-serif",
-        "font-size": ".85rem",
-        "color": "#55503F"
-      },
-      "button": {
-        "font-family": "Poppins, sans-serif",
-        "font-size": "12px",
-        "font-weight": "400",
-        "letter-spacing": "0.25em",
-        "text-transform": "uppercase",
-        "padding-top": "16px", "padding-bottom": "16px",
-        "padding-left": "34px", "padding-right": "34px",
-        "color": "#F4EFE3",
-        "background-color": "#2A271F",
-        "border-radius": "0",
-        "margin-top": "1.4rem",
-        ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
-        ":focus": { "background-color": "#B08F45" }
-      }
-    },
-    "contents": {
-      "img": false,
-      "imgWithCarousel": false,
-      "title": false,
-      "description": false
-    },
-    "width": "100%",
-    "text": {
-      "button": "Add to cart"
-    }
-  },
-  "modalProduct": {
-    "contents": {
-      "img": false,
-      "imgWithCarousel": true,
-      "button": false,
-      "buttonWithQuantity": true
-    },
-    "styles": {
-      "product": {
-        "@media (min-width: 601px)": {
-          "max-width": "100%",
-          "margin-left": "0px",
-          "margin-bottom": "0px"
-        }
-      },
-      "button": {
-        "font-family": "Poppins, sans-serif",
-        "text-transform": "uppercase",
-        "letter-spacing": "0.2em",
-        "color": "#F4EFE3",
-        "background-color": "#2A271F",
-        "border-radius": "0",
-        ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
-        ":focus": { "background-color": "#B08F45" }
-      },
-      "title": {
-        "font-family": "Poppins, sans-serif",
-        "font-weight": "500",
-        "font-size": "26px",
-        "color": "#2A271F"
-      },
-      "price": {
-        "font-family": "Poppins, sans-serif",
-        "font-weight": "normal",
-        "font-size": "18px",
-        "color": "#2A271F"
-      },
-      "compareAt": {
-        "font-family": "Poppins, sans-serif",
-        "font-weight": "normal",
-        "font-size": "15.3px",
-        "color": "#55503F"
-      },
-      "unitPrice": {
-        "font-family": "Poppins, sans-serif",
-        "font-weight": "normal",
-        "font-size": "15.3px",
-        "color": "#55503F"
-      }
-    },
-    "text": {
-      "button": "Add to cart"
-    }
-  },
-  "cart": {
-    "styles": {
-      "button": {
-        "font-family": "Poppins, sans-serif",
-        "font-size": "12px",
-        "letter-spacing": "0.2em",
-        "text-transform": "uppercase",
-        "color": "#F4EFE3",
-        "background-color": "#2A271F",
-        "border-radius": "0",
-        ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
-        ":focus": { "background-color": "#B08F45" }
-      }
-    },
-    "text": { "total": "Subtotal", "button": "Checkout" }
-  },
-  "toggle": {
-    "styles": {
-      "toggle": {
-        "font-family": "Poppins, sans-serif",
-        "background-color": "#2A271F",
-        ":hover": { "background-color": "#4a4636" },
-        ":focus": { "background-color": "#4a4636" }
-      },
-      "count": { "color": "#F4EFE3", ":hover": { "color": "#F4EFE3" } },
-      "iconPath": { "fill": "#F4EFE3" }
-    }
-  }
-},
-      });
-    }
-  }
-})();
-/*]]>*/
-</script>
-
-<!-- ============================================================
-     CART NOTE — Shopify rendert die Cart-Sidebar in einem eigenen
-     Iframe (frame-cart), daher per MutationObserver von aussen den
-     Hinweis direkt unter den Mengen-Stepper jeder Cart-Zeile setzen.
-     ============================================================ -->
-<script type="text/javascript">
-(function () {
-  function addNote(doc, container) {
-    if (container.nextElementSibling && container.nextElementSibling.classList.contains('cl-shipping-note')) return;
-    var note = doc.createElement('p');
-    note.className = 'cl-shipping-note';
-    note.textContent = 'For bars, restaurants and thirsty friends — from 6 bottles: CHF 26 per bottle + free shipping';
-    note.style.cssText = 'font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#B08F45;margin:14px 0 0;text-align:left;';
-    container.insertAdjacentElement('afterend', note);
-    var li = container.closest('.shopify-buy__cart-item');
-    if (li) {
-      var offset = container.getBoundingClientRect().left - li.getBoundingClientRect().left;
-      note.style.marginLeft = offset + 'px';
-    }
-  }
-  function scanCart() {
-    var cf = document.querySelector('iframe[name="frame-cart"]');
-    if (!cf) return;
-    var doc;
-    try { doc = cf.contentDocument; } catch (e) { return; }
-    if (!doc || !doc.body) return;
-    doc.querySelectorAll('.shopify-buy__quantity-container').forEach(function (c) { addNote(doc, c); });
-    if (!cf.__clObserved) {
-      cf.__clObserved = true;
-      new MutationObserver(scanCart).observe(doc.body, { childList: true, subtree: true });
-    }
-  }
-  new MutationObserver(scanCart).observe(document.documentElement, { childList: true, subtree: true });
-  scanCart();
-})();
-</script>
-
-<!-- ============================================================
-     MENGENPREIS — Shopify rendert den Preis in einem eigenen Iframe
-     (frame-product). Per MutationObserver direkt unter dem Preis den
-     Hinweis einfügen und die Iframe-Höhe nachziehen, damit nichts
-     abgeschnitten wird. Muss mit den Shopify-Einstellungen des
-     Partners übereinstimmen (CHF 26/Flasche + Gratisversand ab 6).
-     ============================================================ -->
-<script type="text/javascript">
-(function () {
-  // Textstücke, die nie umbrechen — Zeilen brechen nur zwischen den Stücken
-  var LABEL = ['For bars, restaurants', 'and thirsty friends'];
-  var OFFER = ['From 6 bottles: CHF 26 per bottle', '+ free shipping'];
-  function fillChunks(doc, el, parts) {
-    parts.forEach(function (t, i) {
-      if (i) el.appendChild(doc.createTextNode(' '));
-      var c = doc.createElement('span');
-      c.style.whiteSpace = 'nowrap';
-      c.textContent = t;
-      el.appendChild(c);
-    });
-  }
-  function addTierNote(doc, price) {
-    var next = price.nextElementSibling;
-    if (next && next.classList.contains('cl-tier-note')) return;
-    var note = doc.createElement('p');
-    note.className = 'cl-tier-note';
-    note.style.cssText = 'display:inline-block;font-family:Poppins,sans-serif;color:#B08F45;border:1px solid #B08F45;padding:10px 18px 11px;margin:14px 0 2px;text-align:center;line-height:1.35;';
-    var label = doc.createElement('span');
-    fillChunks(doc, label, LABEL);
-    label.style.cssText = 'display:block;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px;';
-    var offer = doc.createElement('span');
-    fillChunks(doc, offer, OFFER);
-    offer.style.cssText = 'display:block;font-size:15px;font-weight:500;letter-spacing:.02em;';
-    note.appendChild(label);
-    note.appendChild(offer);
-    price.insertAdjacentElement('afterend', note);
-  }
-  // Echten Button einblenden, sobald Preis, Hinweis und Button im Iframe stehen.
-  // Wurde der Platzhalter-Button schon geklickt, den Klick nachholen.
-  var box = document.getElementById('buyBox');
-  var fbBtn = document.getElementById('buyFallbackBtn');
-  var pending = false;
-  function markReady(doc) {
-    if (box.classList.contains('ready')) return;
-    var btn = doc.querySelector('.shopify-buy__btn');
-    if (!btn || !doc.querySelector('.cl-tier-note')) return;
-    box.classList.add('ready');
-    if (pending) { pending = false; btn.click(); }
-  }
-  fbBtn.addEventListener('click', function () {
-    pending = true;
-    fbBtn.textContent = 'Adding…';
-    setTimeout(function () { if (pending) { pending = false; fbBtn.textContent = 'Add to cart'; } }, 20000);
-  });
-  function fitFrame(pf, doc) {
-    var h = doc.body.scrollHeight;
-    if (h && Math.abs(pf.offsetHeight - h) > 1) pf.style.height = h + 'px';
-  }
-  function scanPrices() {
-    document.querySelectorAll('iframe[name^="frame-product"]').forEach(function (pf) {
-      var doc;
-      try { doc = pf.contentDocument; } catch (e) { return; }
-      if (!doc || !doc.body) return;
-      doc.querySelectorAll('.shopify-buy__product__price').forEach(function (p) { addTierNote(doc, p); });
-      fitFrame(pf, doc);
-      markReady(doc);
-      if (!pf.__clTierObserved) {
-        pf.__clTierObserved = true;
-        new MutationObserver(scanPrices).observe(doc.body, { childList: true, subtree: true });
-        if ('ResizeObserver' in window) new ResizeObserver(function () { fitFrame(pf, doc); }).observe(doc.body);
-      }
-    });
-  }
-  new MutationObserver(scanPrices).observe(document.documentElement, { childList: true, subtree: true });
-  scanPrices();
-})();
-</script>
-
-<!-- ============================================================
-     TITLE CASE FIX — Shopify liefert den Produkttitel als "CAN
-     Limoncello" (Datenquelle, nicht unser Code). Im Produkt-Iframe
-     per MutationObserver auf "Can" korrigieren.
-     ============================================================ -->
-<script type="text/javascript">
-(function () {
-  function fixTitle(el) {
-    if (el.dataset.clFixed) return;
-    el.textContent = el.textContent.replace(/^CAN\b/, 'Can');
-    el.dataset.clFixed = '1';
-  }
-  function scanTitles() {
-    document.querySelectorAll('iframe[name^="frame-product"]').forEach(function (pf) {
-      var doc;
-      try { doc = pf.contentDocument; } catch (e) { return; }
-      if (!doc || !doc.body) return;
-      doc.querySelectorAll('.shopify-buy__product__title').forEach(fixTitle);
-      if (!pf.__clTitleObserved) {
-        pf.__clTitleObserved = true;
-        new MutationObserver(scanTitles).observe(doc.body, { childList: true, subtree: true, characterData: true });
-      }
-    });
-  }
-  new MutationObserver(scanTitles).observe(document.documentElement, { childList: true, subtree: true });
-  scanTitles();
-})();
-</script>
-
-<!-- ============================================================
-     CHECKOUT FIX — Der "Checkout"-Button der von Shopify unter
-     sdks.shopifycdn.com/buy-button/latest/ gehosteten SDK löst bei
-     uns aus unbekanntem Grund keine Navigation mehr aus: die SDK
-     loggt zwar ihr eigenes Klick-Telemetrie-Event, aber danach
-     folgt weder eine Weiterleitung noch ein Fehler noch ein
-     Netzwerk-Request — vermutlich ein Bug in deren Skript (das
-     "latest" ist und sich ohne unser Zutun ändern kann). Die
-     Storefront-API selbst funktioniert nachweislich einwandfrei.
-     Daher hier den Klick selbst behandeln: den von der SDK
-     verwalteten Cart frisch abrufen und direkt zu dessen webUrl
-     weiterleiten, statt uns auf den kaputten SDK-Handler zu
-     verlassen.
-     ============================================================ -->
-<script type="text/javascript">
-(function () {
-  var domain = 'xy311a-ax.myshopify.com';
-  var token = 'acfef6dc81a838c3c5ceb0c46d0a569f';
-  var storageKey = token + '.' + domain + '.checkoutId';
-
-  function goToCheckout() {
-    var id;
-    try { id = window.localStorage.getItem(storageKey); } catch (e) {}
-    if (!id || !window.ShopifyBuy) return;
-    var client = ShopifyBuy.buildClient({ domain: domain, storefrontAccessToken: token });
-    client.checkout.fetch(id).then(function (checkout) {
-      if (checkout && checkout.webUrl) {
-        window.top.location.href = checkout.webUrl;
-      }
-    });
-  }
-
-  function wireButton(btn) {
-    if (btn.__clWired) return;
-    btn.__clWired = true;
-    btn.addEventListener('click', goToCheckout);
-  }
-
-  function scanCheckoutButtons() {
-    document.querySelectorAll('iframe[name="frame-cart"]').forEach(function (cf) {
-      var doc;
-      try { doc = cf.contentDocument; } catch (e) { return; }
-      if (!doc || !doc.body) return;
-      doc.querySelectorAll('.shopify-buy__btn--cart-checkout').forEach(wireButton);
-      if (!cf.__clCheckoutObserved) {
-        cf.__clCheckoutObserved = true;
-        new MutationObserver(scanCheckoutButtons).observe(doc.body, { childList: true, subtree: true });
-      }
-    });
-  }
-  new MutationObserver(scanCheckoutButtons).observe(document.documentElement, { childList: true, subtree: true });
-  scanCheckoutButtons();
-})();
-</script>
+<!-- Der Shopify-Kaufbereich ist nur auf der Produktseite (limoncello.html, assets/js/shop.js). -->
 </body>
 </html>
