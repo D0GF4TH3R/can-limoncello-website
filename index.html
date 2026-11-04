@@ -48,8 +48,8 @@ window.addEventListener('pageshow', function (event) {
 <!-- Schrift lädt ohne das Rendern zu blockieren; nur die genutzten Schnitte -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/style.css?v=20261104">
+<link rel="stylesheet" href="assets/css/site.css?v=20261104">
 
 <style>
   /* ============================================================
@@ -63,6 +63,7 @@ window.addEventListener('pageshow', function (event) {
   /* ---------- INTRO ---------- */
   #intro{position:fixed;inset:0;z-index:9999;background:#FFFFFF;display:flex;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease}
   #intro.hide{opacity:0;pointer-events:none}
+  html.intro-seen #intro{display:none}
   #intro > p{position:absolute;left:1.5rem;right:1.5rem;font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--ink);letter-spacing:.02em;opacity:0;transition:opacity .6s ease}
   #intro > p.show{opacity:1}
   #intro .intro-mark{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:0;transition:opacity .6s ease}
@@ -211,6 +212,11 @@ window.addEventListener('pageshow', function (event) {
 </style>
 </head>
 <body class="intro-lock">
+<script>
+  // Intro nur beim ersten Seitenaufruf eines Besuchs zeigen (z. B. nicht erneut,
+  // wenn man von der Produktseite zurückkommt).
+  try { if (sessionStorage.getItem('cl-intro-seen')) { document.documentElement.classList.add('intro-seen'); document.body.classList.remove('intro-lock'); } } catch (e) {}
+</script>
 
 <!-- ============================================================
      INTRO — Text, dann Logo + Markenname, danach Fade auf die Seite.
@@ -241,9 +247,9 @@ window.addEventListener('pageshow', function (event) {
      ============================================================ -->
 <section class="hero" id="top">
   <div class="hero-media">
-    <video class="tile-1" data-src="assets/video/water-vertical.mp4" poster="assets/img/web/poster-water-vertical.jpg" muted loop playsinline preload="none"></video>
-    <video class="tile-2" data-src="assets/video/water-laying.mp4" data-poster="assets/img/web/poster-water-laying.jpg" muted loop playsinline preload="none"></video>
-    <video class="tile-3" data-src="assets/video/sunset-ride.mp4" data-poster="assets/img/web/poster-sunset-ride.jpg" muted loop playsinline preload="none"></video>
+    <video class="tile-1" data-src="assets/video/water-vertical.mp4" poster="assets/img/web/poster-water-vertical.webp" muted loop playsinline preload="none"></video>
+    <video class="tile-2" data-src="assets/video/water-laying.mp4" data-poster="assets/img/web/poster-water-laying.webp" muted loop playsinline preload="none"></video>
+    <video class="tile-3" data-src="assets/video/sunset-ride.mp4" data-poster="assets/img/web/poster-sunset-ride.webp" muted loop playsinline preload="none"></video>
   </div>
   <div class="hero-copy">
     <p class="label">Lemons from Ibiza · Love from Switzerland</p>
@@ -265,7 +271,7 @@ window.addEventListener('pageshow', function (event) {
 <section class="product" id="limoncello">
   <div class="product-grid">
     <a class="product-media mask" href="limoncello.html" data-parallax="0.08" aria-label="Can Limoncello — product details">
-      <img data-src="assets/img/web/bottle-bay.jpg" alt="Can Limoncello bottle on a stone wall above a bay in Ibiza">
+      <img data-src="assets/img/web/bottle-bay.webp" alt="Can Limoncello bottle on a stone wall above a bay in Ibiza">
     </a>
     <div class="product-info rv rv-d1">
       <p class="label label-gold">The Limoncello</p>
@@ -287,10 +293,10 @@ window.addEventListener('pageshow', function (event) {
   </div>
   <div class="chapter-grid">
     <figure class="c1-big">
-      <div class="frame mask" data-parallax="0.1"><img class="keep-right" data-src="assets/img/legends-karl-giorgio.jpg" alt="Karl Lagerfeld and Giorgio Armani"></div>
+      <div class="frame mask" data-parallax="0.1"><img class="keep-right" data-src="assets/img/web/legends-karl-giorgio.webp" alt="Karl Lagerfeld and Giorgio Armani"></div>
     </figure>
     <figure class="c1-side">
-      <div class="frame mask" data-parallax="0.18"><img data-src="assets/img/legends-freddy.jpg" alt="Freddie Mercury with a tennis racket"></div>
+      <div class="frame mask" data-parallax="0.18"><img data-src="assets/img/web/legends-freddy.webp" alt="Freddie Mercury with a tennis racket"></div>
       <p class="chapter-text rv">For decades, Ibiza has drawn legends from all over the world — artists, designers and free spirits who came to live freely and with passion. Can Limoncello's creative ambition is to capture that magic in a bottle.</p>
     </figure>
   </div>
@@ -300,8 +306,8 @@ window.addEventListener('pageshow', function (event) {
 <section class="band" id="esvedra">
   <div class="band-sticky">
     <div class="band-frame">
-      <video class="v-landscape" data-src="assets/video/hero-desktop.mp4" data-poster="assets/img/web/es-vedra.jpg" muted loop playsinline preload="none"></video>
-      <video class="v-portrait" data-src="assets/video/hero-portrait.mp4" data-poster="assets/img/web/es-vedra.jpg" muted loop playsinline preload="none"></video>
+      <video class="v-landscape" data-src="assets/video/hero-desktop.mp4" data-poster="assets/img/web/es-vedra.webp" muted loop playsinline preload="none"></video>
+      <video class="v-portrait" data-src="assets/video/hero-portrait.mp4" data-poster="assets/img/web/es-vedra.webp" muted loop playsinline preload="none"></video>
     </div>
     <blockquote>
       <span class="label">Es Vedrà</span>
@@ -319,10 +325,10 @@ window.addEventListener('pageshow', function (event) {
   <div class="chapter-grid">
     <figure class="c2-side">
       <p class="chapter-text rv">Our lemons grow on a farm in San Lorenzo, in the quiet green heart of Ibiza, ripening slowly under the island sun. In Switzerland, their peels are cut and prepared by hand and given time to rest until the limoncello reaches its golden balance — patient, precise and made with Swiss care.</p>
-      <div class="frame mask" data-parallax="0.18"><img data-src="assets/img/web/farm-san-lorenzo.jpg" alt="Rows of citrus trees at the farm in San Lorenzo, Ibiza"></div>
+      <div class="frame mask" data-parallax="0.18"><img data-src="assets/img/web/farm-san-lorenzo.webp" alt="Rows of citrus trees at the farm in San Lorenzo, Ibiza"></div>
     </figure>
     <figure class="c2-big">
-      <div class="frame mask" data-parallax="0.1"><img data-src="assets/img/web/production-peels.jpg" alt="Freshly cut lemon peels held by hand during production"></div>
+      <div class="frame mask" data-parallax="0.1"><img data-src="assets/img/web/production-peels.webp" alt="Freshly cut lemon peels held by hand during production"></div>
     </figure>
   </div>
 </section>
@@ -337,31 +343,31 @@ window.addEventListener('pageshow', function (event) {
     <a class="line-link" href="https://www.instagram.com/canlimoncello" target="_blank" rel="noopener">Instagram</a>
   </div>
   <div class="gallery-track">
-    <figure><img data-src="assets/img/web/bottle-rockpool.jpg" alt="Can Limoncello bottle in a tidal rock pool"></figure>
-    <figure><img data-src="assets/img/web/gallery-es-xarcu.jpg" alt="Can Limoncello at the table at Es Xarcu"></figure>
-    <figure><img data-src="assets/img/web/bottle-fishing-net.jpg" alt="Can Limoncello bottle against a fishing net"></figure>
-    <figure><img data-src="assets/img/web/cliffside-desk.jpg" alt="Cliffside terrace over the sea"></figure>
-    <figure><img data-src="assets/img/web/bottle-tidepool.jpg" alt="Can Limoncello bottle by the water"></figure>
-    <figure><img data-src="assets/img/web/gallery-anita.jpg" alt="Can Limoncello at Bar Anita"></figure>
-    <figure><img data-src="assets/img/web/gallery-party.jpg" alt="Summer party in a garden with bougainvillea"></figure>
-    <figure><img data-src="assets/img/web/mountain-party-friends.jpg" alt="Two friends with Can Limoncello at a summer party"></figure>
-    <figure><img data-src="assets/img/web/bottles-lineup.jpg" alt="Bottles of Can Limoncello"></figure>
-    <figure><img data-src="assets/img/web/porxo.jpg" alt="White arches and steps"></figure>
-    <figure><img data-src="assets/img/web/bottle-moody-taverna.jpg" alt="Can Limoncello bottle in a moody taverna"></figure>
-    <figure><img data-src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt="Hï Ibiza sign"></figure>
+    <figure><img data-src="assets/img/web/bottle-rockpool.webp" alt="Can Limoncello bottle in a tidal rock pool"></figure>
+    <figure><img data-src="assets/img/web/gallery-es-xarcu.webp" alt="Can Limoncello at the table at Es Xarcu"></figure>
+    <figure><img data-src="assets/img/web/bottle-fishing-net.webp" alt="Can Limoncello bottle against a fishing net"></figure>
+    <figure><img data-src="assets/img/web/cliffside-desk.webp" alt="Cliffside terrace over the sea"></figure>
+    <figure><img data-src="assets/img/web/bottle-tidepool.webp" alt="Can Limoncello bottle by the water"></figure>
+    <figure><img data-src="assets/img/web/gallery-anita.webp" alt="Can Limoncello at Bar Anita"></figure>
+    <figure><img data-src="assets/img/web/gallery-party.webp" alt="Summer party in a garden with bougainvillea"></figure>
+    <figure><img data-src="assets/img/web/mountain-party-friends.webp" alt="Two friends with Can Limoncello at a summer party"></figure>
+    <figure><img data-src="assets/img/web/bottles-lineup.webp" alt="Bottles of Can Limoncello"></figure>
+    <figure><img data-src="assets/img/web/porxo.webp" alt="White arches and steps"></figure>
+    <figure><img data-src="assets/img/web/bottle-moody-taverna.webp" alt="Can Limoncello bottle in a moody taverna"></figure>
+    <figure><img data-src="assets/img/web/hi-ibiza-sign.webp" alt="Hï Ibiza sign"></figure>
     <!-- Duplikat der Liste für nahtlosen Loop -->
-    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-rockpool.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/gallery-es-xarcu.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-fishing-net.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/cliffside-desk.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-tidepool.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/gallery-anita.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/gallery-party.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/mountain-party-friends.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/bottles-lineup.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/porxo.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-moody-taverna.jpg" alt=""></figure>
-    <figure aria-hidden="true"><img data-src="assets/Ibiza%20images/hi-ibiza-sign.jpg" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-rockpool.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/gallery-es-xarcu.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-fishing-net.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/cliffside-desk.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-tidepool.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/gallery-anita.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/gallery-party.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/mountain-party-friends.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/bottles-lineup.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/porxo.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/bottle-moody-taverna.webp" alt=""></figure>
+    <figure aria-hidden="true"><img data-src="assets/img/web/hi-ibiza-sign.webp" alt=""></figure>
   </div>
 </section>
 
@@ -576,10 +582,13 @@ window.addEventListener('pageshow', function (event) {
   var intro = document.getElementById('intro');
   var skip = document.getElementById('introSkip');
 
-  var SHOW_TEXT1 = 300;
-  var HIDE_TEXT1 = SHOW_TEXT1 + 2000;
-  var SHOW_MARK = HIDE_TEXT1 + 900;
-  var END = SHOW_MARK + 2200;
+  if (document.documentElement.classList.contains('intro-seen')) return;
+  try { sessionStorage.setItem('cl-intro-seen', '1'); } catch (e) {}
+
+  var SHOW_TEXT1 = 200;
+  var HIDE_TEXT1 = SHOW_TEXT1 + 1600;
+  var SHOW_MARK = HIDE_TEXT1 + 600;
+  var END = SHOW_MARK + 1500;
 
   function finish() {
     t1.classList.remove('show');

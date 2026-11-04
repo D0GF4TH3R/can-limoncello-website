@@ -63,8 +63,9 @@ window.addEventListener('pageshow', function (event) {
 <link rel="preconnect" href="https://sdks.shopifycdn.com">
 <link rel="preconnect" href="https://xy311a-ax.myshopify.com">
 <script async id="shopifySdk" src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="preload" as="image" href="assets/img/web/product-bay.webp" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/style.css?v=20261104">
+<link rel="stylesheet" href="assets/css/site.css?v=20261104">
 
 <style>
   /* ============================================================
@@ -172,9 +173,9 @@ window.addEventListener('pageshow', function (event) {
   <section class="pdp-top">
     <div class="pdp-slider" aria-roledescription="carousel" aria-label="Photos of Can Limoncello">
       <div class="pdp-slides" id="pdpSlides">
-        <figure><img src="assets/img/web/product-bay.jpg" alt="Can Limoncello bottle on a stone wall above a bay in Ibiza"></figure>
-        <figure><img src="assets/img/web/product-fishing-net.jpg" alt="Can Limoncello bottle in front of a fishing net" loading="lazy"></figure>
-        <figure><img src="assets/img/web/product-rockpool.jpg" alt="Can Limoncello bottle in a tidal rock pool" loading="lazy"></figure>
+        <figure><img src="assets/img/web/product-bay.webp" fetchpriority="high" alt="Can Limoncello bottle on a stone wall above a bay in Ibiza"></figure>
+        <figure><img data-src="assets/img/web/product-fishing-net.webp" alt="Can Limoncello bottle in front of a fishing net"></figure>
+        <figure><img data-src="assets/img/web/product-rockpool.webp" alt="Can Limoncello bottle in a tidal rock pool"></figure>
       </div>
       <button class="pdp-arrow prev" type="button" aria-label="Previous photo">&#8249;</button>
       <button class="pdp-arrow next" type="button" aria-label="Next photo">&#8250;</button>
@@ -211,14 +212,14 @@ window.addEventListener('pageshow', function (event) {
       <p class="pdp-p">Our lemons grow on a farm in San Lorenzo, in the quiet green heart of Ibiza. They ripen slowly under the island sun — the island of the goddess Tanit, where every bottle begins.</p>
     </div>
     <div class="ed-media">
-      <figure class="frame ed-big" data-parallax="0.06"><img src="assets/img/web/farm-san-lorenzo.jpg" alt="Rows of citrus trees at the farm in San Lorenzo, Ibiza" loading="lazy"></figure>
-      <figure class="frame ed-small" data-parallax="0.16"><img src="assets/img/web/farm-lemons.jpg" alt="Lemons ripening on a branch" loading="lazy"></figure>
+      <figure class="frame ed-big" data-parallax="0.06"><img data-src="assets/img/web/farm-san-lorenzo.webp" alt="Rows of citrus trees at the farm in San Lorenzo, Ibiza"></figure>
+      <figure class="frame ed-small" data-parallax="0.16"><img data-src="assets/img/web/farm-lemons.webp" alt="Lemons ripening on a branch"></figure>
     </div>
   </section>
 
   <!-- B — Produktion über die ganze Breite -->
   <section class="ed-full">
-    <figure class="frame" data-parallax="0.12"><img src="assets/img/web/production-hands.jpg" alt="Freshly cut lemon peels held by hand in Switzerland" loading="lazy"></figure>
+    <figure class="frame" data-parallax="0.12"><img data-src="assets/img/web/production-hands.webp" alt="Freshly cut lemon peels held by hand in Switzerland"></figure>
   </section>
 
   <!-- C — zentrierter Text -->
@@ -234,7 +235,7 @@ window.addEventListener('pageshow', function (event) {
       <p class="pdp-p">Golden, bright and smooth. Serve Can Limoncello well chilled, neat or over ice. Take a sip, close your eyes, and let Ibiza find you.</p>
       <a class="pdp-link" href="#buyBox">Shop now</a>
     </div>
-    <figure class="frame ed-big" data-parallax="0.08"><img src="assets/img/web/product-lineup.jpg" alt="Bottles of Can Limoncello in a row" loading="lazy"></figure>
+    <figure class="frame ed-big" data-parallax="0.08"><img data-src="assets/img/web/product-lineup.webp" alt="Bottles of Can Limoncello in a row"></figure>
   </section>
 
 </main>
@@ -317,6 +318,22 @@ window.addEventListener('pageshow', function (event) {
   document.querySelector('.pdp-arrow.next').addEventListener('click', function () { go(current() + 1); });
   markDot();
 
+  // Fotos nachladen: weitere Slider-Fotos nach dem Seiten-Load,
+  // Fotos weiter unten kurz bevor sie ins Bild kommen.
+  function loadImg(img) { if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); } }
+  var lazy = [].slice.call(document.querySelectorAll('img[data-src]'));
+  var sliderImgs = lazy.filter(function (i) { return slides.contains(i); });
+  var restImgs = lazy.filter(function (i) { return !slides.contains(i); });
+  function loadSlider() { sliderImgs.forEach(loadImg); }
+  if (document.readyState === 'complete') loadSlider(); else window.addEventListener('load', loadSlider);
+  slides.addEventListener('scroll', loadSlider, { passive: true, once: true });
+  if ('IntersectionObserver' in window) {
+    var lio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { loadImg(e.target); lio.unobserve(e.target); } });
+    }, { rootMargin: '600px 0px' });
+    restImgs.forEach(function (i) { lio.observe(i); });
+  } else { restImgs.forEach(loadImg); }
+
   // Parallax + Einblenden
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var parallax = [].slice.call(document.querySelectorAll('[data-parallax]'));
@@ -347,6 +364,6 @@ window.addEventListener('pageshow', function (event) {
 })();
 </script>
 
-<script src="assets/js/shop.js"></script>
+<script src="assets/js/shop.js?v=20261104"></script>
 </body>
 </html>
