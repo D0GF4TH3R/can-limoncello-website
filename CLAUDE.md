@@ -25,18 +25,20 @@ gedämpfte Sand-/Meer-/Zitronentöne, viel Leerraum. Die Flasche erscheint nur b
 Keine Rabatte, kein CTA-Lärm, keine Menschen beim Trinken (Schweizer Werberecht).
 
 ## Struktur
-- `index.html` — Startseite (Hero-Video, Welt, Limoncello, Ritual, Brief)
-- `limoncello.html` — Produktseite nach Dom-Pérignon-Vorbild: Foto-Slider + Kaufpanel, darunter Blöcke mit Parallax-Fotos; 26% vol. Einziger Ort mit Shopify-Kaufbutton
-- `assets/css/site.css` — gemeinsame Styles beider Seiten (Farben, Menü, Kaufbereich, Footer)
-- `assets/js/shop.js` — Shopify-Kaufbereich (nur Produktseite; Startseite hat nur Teaser + "Shop now") (Button, Platzhalter, Mengenpreis, Warenkorb, Checkout-Fix). Preis CHF 40 steht zusätzlich als Platzhalter im HTML + im JSON-LD von limoncello.html
+**Seit 17.11.2026: nur noch eine Kaufseite.** Die frühere, ausführliche Website (Hero-Videos,
+Insel-Kapitel, Galerie, Produktseite nach Dom-Pérignon-Vorbild) ist auf GitHub gesichert:
+Branch `archive/full-site`, Tag `full-site-2026-11-17`. Zurück mit z. B.
+`git checkout full-site-2026-11-17 -- index.html limoncello.html assets/` und pushen.
+- `index.html` — einzige Seite: Produktfoto, Preise (Einzelpreis CHF 40 + Versand; Gastropreis
+  CHF 28 ab 6 Flaschen inkl. Versand), Menge + Warenkorb (Shopify), Details (26% vol.)
+- `limoncello.html` — nur noch Weiterleitung auf `/` (alte Links)
+- `impressum.html`, `datenschutz.html` — Rechtsseiten
+- `assets/css/site.css` — Farben, Kaufbereich-Platzhalter, Footer (`style.css` = Altbestand, Klassen-Kollisionen beachten, z. B. `.price`)
+- `assets/js/shop.js` — Shopify: Mengenauswahl + Button, Platzhalter-Tausch, Warenkorb-Hinweis, Checkout-Fix
+- **Preise stehen an 3 Stellen und müssen mit Shopify übereinstimmen:** Preisboxen in `index.html`,
+  JSON-LD in `index.html`, Warenkorb-Hinweis in `shop.js`. Gastropreis/Gratisversand selbst wird in Shopify eingestellt.
 - `.htaccess` — Browser-Caching. CSS/JS werden 1 Jahr gecacht: in den HTML-Seiten mit `?v=DATUM` eingebunden — **bei jeder Änderung an CSS/JS die Nummer in allen Seiten erhöhen**.
-- Fotos: Seiten nutzen WebP-Kopien in `assets/img/web/` (aus den Originalen erzeugt, Ausrichtung korrigiert).
-- `impressum.html`, `datenschutz.html` — Rechtsseiten, Platzhalter `[[…]]` mit Partner-Daten füllen
-  (AGB/Widerruf wurden entfernt — siehe Vertriebsmodell oben)
-- `assets/css/style.css` — gesamtes Styling; Farbvariablen oben in `:root`
-- `assets/js/i18n.js` — **alle Texte** in `de`/`en`/`es`
-- `assets/js/main.js` — Sprachschalter, Newsletter-Formular, Scroll-Effekte
-- `assets/img/` — Bilder · `assets/video/` — hier gehört `hero.mp4` hin
+- Fotos: WebP-Kopien in `assets/img/web/` (aus den Originalen erzeugt).
 
 ## Konventionen
 - **Texte niemals direkt ins HTML** schreiben. Im HTML nur Schlüssel `data-i18n="key"`

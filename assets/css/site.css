@@ -48,13 +48,14 @@ section{padding:0}
 /* ---------- KAUFBEREICH ---------- */
 .landing-buy{position:relative;margin-top:2.2rem}
 /* Platzhalter — Masse 1:1 wie im Shopify-Iframe (dort rendert die Systemschrift) */
-.buy-fallback{font-family:sans-serif;text-align:left;font-size:14px;line-height:16.8px;color:#4C4C4C}
-.bf-price{font-size:15.4px;line-height:18.48px;color:#2A271F;margin:0 0 15px}
-.bf-tier{display:block;color:#B08F45;border:1px solid #B08F45;padding:10px 18px 11px;margin:14px 0 2px;line-height:1.35}
-.bf-tier-label{display:block;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
-.bf-tier-offer{display:block;font-size:15px;font-weight:500;letter-spacing:.02em}
-.bf-btn-line{margin:20px 0 0}
-.bf-btn{font-family:sans-serif;font-size:12px;line-height:14.4px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:#F4EFE3;background:#2A271F;border:0;border-radius:0;padding:16px 34px;width:100%;cursor:pointer;transition:background .3s,color .3s}
+/* Platzhalter für Mengenauswahl + Button — Masse 1:1 wie im Shopify-Iframe
+   (dort rendert die Systemschrift). Wird gegen den echten Button getauscht. */
+.buy-fallback{display:flex;height:48px;font-family:sans-serif;color:#2A271F}
+.bf-qty{display:flex;flex:0 0 128px;height:48px}
+.bf-qty span{display:flex;align-items:center;justify-content:center;box-sizing:border-box;height:48px}
+.bf-minus,.bf-plus{width:40px;border:1px solid #2A271F;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:18px}
+.bf-num{width:48px;border-top:1px solid #2A271F;border-bottom:1px solid #2A271F;background:#fff;font-size:15px}
+.bf-btn{flex:1 1 auto;margin-left:10px;height:48px;font-family:sans-serif;font-size:12px;line-height:14.4px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:#F4EFE3;background:#2A271F;border:0;border-radius:0;padding:0 16px;cursor:pointer;transition:background .3s,color .3s}
 .bf-btn:hover{background:#B08F45;color:#2A271F}
 .buy-live{position:absolute;top:0;left:0;right:0;opacity:0;pointer-events:none}
 #buyBox.ready .buy-live{position:static;opacity:1;pointer-events:auto}

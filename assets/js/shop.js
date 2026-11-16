@@ -119,17 +119,35 @@
         "color": "#F4EFE3",
         "background-color": "#2A271F",
         "border-radius": "0",
-        "margin-top": "1.4rem",
         "width": "100%",
         ":hover": { "color": "#2A271F", "background-color": "#B08F45" },
         ":focus": { "background-color": "#B08F45" }
+      },
+      "buttonWrapper": { "width": "calc(100% - 128px)", "padding-left": "10px" },
+      "quantityInput": {
+        "font-family": "Poppins, sans-serif", "font-size": "15px", "color": "#2A271F",
+        "width": "48px", "height": "48px", "padding": "0",
+        "border-color": "#2A271F", "border-left": "0", "border-right": "0", "border-radius": "0"
+      },
+      "quantityIncrement": {
+        "width": "40px", "height": "48px", "font-size": "18px", "color": "#2A271F",
+        "border-color": "#2A271F", "border-radius": "0"
+      },
+      "quantityDecrement": {
+        "width": "40px", "height": "48px", "font-size": "18px", "color": "#2A271F",
+        "border-color": "#2A271F", "border-radius": "0"
       }
     },
     "contents": {
       "img": false,
       "imgWithCarousel": false,
       "title": false,
-      "description": false
+      "price": false,
+      "description": false,
+      "button": false,
+      "buttonWithQuantity": true,
+      "quantityIncrement": true,
+      "quantityDecrement": true
     },
     "width": "100%",
     "text": {
@@ -234,7 +252,7 @@
     if (container.nextElementSibling && container.nextElementSibling.classList.contains('cl-shipping-note')) return;
     var note = doc.createElement('p');
     note.className = 'cl-shipping-note';
-    note.textContent = 'For bars, restaurants and thirsty friends — from 6 bottles: CHF 26 per bottle + free shipping';
+    note.textContent = 'Gastro price from 6 bottles: CHF 28 per bottle + free shipping';
     note.style.cssText = 'font-family:Poppins,sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#B08F45;margin:14px 0 0;text-align:left;';
     container.insertAdjacentElement('afterend', note);
     var li = container.closest('.shopify-buy__cart-item');
@@ -260,42 +278,14 @@
 })();
 
 /* ============================================================
-   MENGENPREIS — Shopify rendert den Preis in einem eigenen Iframe
-   (frame-product). Per MutationObserver direkt unter dem Preis den
-   Hinweis einfügen und die Iframe-Höhe nachziehen, damit nichts
-   abgeschnitten wird. Muss mit den Shopify-Einstellungen des
-   Partners übereinstimmen (CHF 26/Flasche + Gratisversand ab 6).
+   KAUFBUTTON BEREIT — Shopify rendert Mengenauswahl + Button in einem
+   eigenen Iframe (frame-product). Sobald der Button dort steht, den
+   sofort sichtbaren Platzhalter gegen den echten Button tauschen und
+   die Iframe-Höhe nachziehen. Preise stehen als Übersicht im HTML der
+   Seite (nicht im Iframe) — müssen mit Shopify übereinstimmen.
    ============================================================ */
 (function () {
-  // Textstücke, die nie umbrechen — Zeilen brechen nur zwischen den Stücken
-  var LABEL = ['For bars, restaurants', 'and thirsty friends'];
-  var OFFER = ['From 6 bottles: CHF 26 per bottle', '+ free shipping'];
-  function fillChunks(doc, el, parts) {
-    parts.forEach(function (t, i) {
-      if (i) el.appendChild(doc.createTextNode(' '));
-      var c = doc.createElement('span');
-      c.style.whiteSpace = 'nowrap';
-      c.textContent = t;
-      el.appendChild(c);
-    });
-  }
-  function addTierNote(doc, price) {
-    var next = price.nextElementSibling;
-    if (next && next.classList.contains('cl-tier-note')) return;
-    var note = doc.createElement('p');
-    note.className = 'cl-tier-note';
-    note.style.cssText = 'display:block;font-family:Poppins,sans-serif;color:#B08F45;border:1px solid #B08F45;padding:10px 18px 11px;margin:14px 0 2px;text-align:left;line-height:1.35;';
-    var label = doc.createElement('span');
-    fillChunks(doc, label, LABEL);
-    label.style.cssText = 'display:block;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px;';
-    var offer = doc.createElement('span');
-    fillChunks(doc, offer, OFFER);
-    offer.style.cssText = 'display:block;font-size:15px;font-weight:500;letter-spacing:.02em;';
-    note.appendChild(label);
-    note.appendChild(offer);
-    price.insertAdjacentElement('afterend', note);
-  }
-  // Echten Button einblenden, sobald Preis, Hinweis und Button im Iframe stehen.
+  // Echten Button einblenden, sobald er im Iframe steht.
   // Wurde der Platzhalter-Button schon geklickt, den Klick nachholen.
   var box = document.getElementById('buyBox');
   var fbBtn = document.getElementById('buyFallbackBtn');
@@ -303,9 +293,15 @@
   function markReady(doc) {
     if (box.classList.contains('ready')) return;
     var btn = doc.querySelector('.shopify-buy__btn');
-    if (!btn || !doc.querySelector('.cl-tier-note')) return;
+    if (!btn) return;
     box.classList.add('ready');
-    if (pending) { pending = false; btn.click(); }
+    // Vorgemerkte Menge (z. B. "Choose 6 bottles" vor dem Laden) zuerst übernehmen
+    if (window.clApplyQty) window.clApplyQty(doc);
+    // Shopify zeichnet nach einer Mengenänderung neu — Button daher kurz danach frisch holen
+    if (pending) {
+      pending = false;
+      setTimeout(function () { var b = doc.querySelector('.shopify-buy__btn'); if (b) b.click(); }, 150);
+    }
   }
   fbBtn.addEventListener('click', function () {
     pending = true;
@@ -321,7 +317,6 @@
       var doc;
       try { doc = pf.contentDocument; } catch (e) { return; }
       if (!doc || !doc.body) return;
-      doc.querySelectorAll('.shopify-buy__product__price').forEach(function (p) { addTierNote(doc, p); });
       fitFrame(pf, doc);
       markReady(doc);
       if (!pf.__clTierObserved) {
